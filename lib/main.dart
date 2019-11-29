@@ -1,27 +1,17 @@
 import 'package:flutter/material.dart';
+import './themes/style.dart';
+import './widgets/bottom_navigation.dart';
 
-void main() => runApp(
-      MaterialApp(home: Home()),
-    );
+void main() {
+  runApp(MyApp());
+}
 
-class Home extends StatelessWidget {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("This is title!"),
-        centerTitle: true,
-        backgroundColor: Colors.indigo,
-      ),
-      body: Padding(
-        child: Text("TEST"),
-        padding: EdgeInsets.all(20.0),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {},
-        backgroundColor: Colors.indigo,
-      ),
+    return MaterialApp(
+      theme: appTheme(),
+      home: BottomNavation(),
     );
   }
 }
