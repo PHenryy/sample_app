@@ -12,25 +12,29 @@ class BaseListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     double _height = ScreenUtil().setWidth(height);
 
-    return Container(
-      height: _height,
-      color: Colors.white,
-      padding: EdgeInsets.only(
-        left: ScreenUtil().setWidth(23),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: ScreenUtil().setSp(28),
-              color: Color(0xFF323232),
+    return InkWell(
+      onTap: () {},
+      child: Container(
+        height: _height,
+        color: Colors.white,
+        padding: EdgeInsets.only(
+          left: ScreenUtil().setWidth(23),
+          right: ScreenUtil().setWidth(23),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: ScreenUtil().setSp(28),
+                color: Color(0xFF323232),
+              ),
             ),
-          ),
-          trailing,
-        ],
+            trailing == null ? Container() : trailing,
+          ],
+        ),
       ),
     );
   }

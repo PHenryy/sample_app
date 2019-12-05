@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:sample_app/models/nav.dart';
 import 'package:sample_app/templates/nav_template.dart';
 import 'package:sample_app/widgets/base_app_bar.dart';
-import 'package:carousel_pro/carousel_pro.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:sample_app/widgets/text_carousel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sample_app/product/product.dart';
@@ -100,15 +100,15 @@ class Home extends StatelessWidget {
                     SizedBox(
                       width: double.infinity,
                       height: MediaQuery.of(context).size.width / 1.875,
-                      child: Carousel(
-                        images: [
-                          AssetImage('assets/images/i1.jpg'),
-                          AssetImage('assets/images/i2.jpg'),
-                          AssetImage('assets/images/i3.jpg'),
-                        ],
-                        dotIncreaseSize: 0,
-                        dotColor: Color(0xFFCCCCCC),
-                        dotBgColor: Colors.transparent,
+                      child: new Swiper(
+                        itemBuilder: (BuildContext context, int index) {
+                          return new Image.asset(
+                            "assets/images/i1.jpg",
+                            fit: BoxFit.cover,
+                          );
+                        },
+                        itemCount: 3,
+                        pagination: new SwiperPagination(),
                       ),
                     ),
                     Container(

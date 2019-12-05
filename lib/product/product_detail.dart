@@ -13,6 +13,14 @@ class ProductDetail extends StatelessWidget {
     icon: Icons.share,
     label: '分享',
   );
+  final Nav _fav = Nav(
+    icon: Icons.favorite,
+    label: '关注',
+  );
+  final Nav _shop = Nav(
+    icon: Icons.shop,
+    label: '店铺',
+  );
   final Color _highlightColor = Color(0xFFFF5B5A);
   final List<String> _tags = <String>[
     '正品保证',
@@ -29,9 +37,12 @@ class ProductDetail extends StatelessWidget {
               new BottomSheetController(),
               // 图片
               Expanded(
-                child: Image.asset(
-                  product.image,
-                  fit: BoxFit.cover,
+                child: Container(
+                  width: double.infinity,
+                  child: Image.asset(
+                    product.image,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               // 商品介绍
@@ -233,12 +244,183 @@ class ProductDetail extends StatelessWidget {
                         },
                       ),
                     ),
-                    // 选择数量
-                    BaseListTile(
-                      title: '请选择数量',
-                    )
                   ],
                 ),
+              ),
+              // 选择数量
+              BaseListTile(
+                title: '请选择数量',
+                trailing: Icon(
+                  Icons.chevron_right,
+                  color: Color(0xFF999999),
+                ),
+              ),
+              SizedBox(
+                height: ScreenUtil().setWidth(20),
+              ),
+              // 店铺
+              Container(
+                color: Colors.white,
+                height: ScreenUtil().setWidth(130),
+                padding: EdgeInsets.only(
+                  right: ScreenUtil().setWidth(44),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.only(
+                            left: ScreenUtil().setWidth(24),
+                            right: ScreenUtil().setWidth(19),
+                          ),
+                          width: ScreenUtil().setWidth(99),
+                          height: ScreenUtil().setWidth(99),
+                          child: Image.asset(
+                            'assets/images/i2.jpg',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        Text(
+                          '媓钻官方商城',
+                          style: TextStyle(
+                            fontSize: ScreenUtil().setWidth(28),
+                            color: Color(0xFF323232),
+                          ),
+                        )
+                      ],
+                    ),
+                    ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxHeight: ScreenUtil().setWidth(56),
+                      ),
+                      child: OutlineButton(
+                        color: Colors.white,
+                        borderSide: new BorderSide(
+                          color: Color(0xFF7C7C7C),
+                        ),
+                        shape: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(
+                            ScreenUtil().setWidth(28),
+                          ),
+                        ),
+                        onPressed: () {},
+                        child: Text(
+                          '进店逛逛',
+                          style: TextStyle(
+                            fontSize: ScreenUtil().setWidth(28),
+                            color: Color(0xFF7C7C7C),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              // 操作
+              Container(
+                height: ScreenUtil().setWidth(95),
+                child: Row(children: <Widget>[
+                  Container(
+                    width: ScreenUtil().setWidth(240),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: InkWell(
+                            onTap: () {},
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Icon(
+                                  _fav.icon,
+                                  color: Color(0xFFFD5454),
+                                ),
+                                Text(
+                                  _fav.label,
+                                  style: TextStyle(
+                                    fontSize: ScreenUtil().setSp(22),
+                                    color: Color(0xFFFD5454),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: InkWell(
+                            onTap: () {},
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Icon(
+                                  _shop.icon,
+                                  color: Color(0xFFFD5454),
+                                ),
+                                Text(
+                                  _shop.label,
+                                  style: TextStyle(
+                                    fontSize: ScreenUtil().setSp(22),
+                                    color: Color(0xFFFD5454),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minHeight: double.infinity,
+                        maxHeight: double.infinity,
+                      ),
+                      child: RaisedButton(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.zero,
+                        ),
+                        elevation: 0,
+                        color: Color(0xFFFE940F),
+                        onPressed: () {},
+                        child: Text(
+                          '加入购物车',
+                          style: TextStyle(
+                            fontSize: ScreenUtil().setSp(28),
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: ScreenUtil().setWidth(240),
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minHeight: double.infinity,
+                        maxHeight: double.infinity,
+                      ),
+                      child: RaisedButton(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.zero,
+                        ),
+                        elevation: 0,
+                        color: Color(0xFFFD5454),
+                        onPressed: () {},
+                        child: Text(
+                          '立即购买',
+                          style: TextStyle(
+                            fontSize: ScreenUtil().setSp(28),
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ]),
               ),
             ],
           ),
