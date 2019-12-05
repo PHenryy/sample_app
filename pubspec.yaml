@@ -25,6 +25,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   carousel_pro: ^1.0.0
   flutter_screenutil: ^0.6.1
+  scoped_model: ^1.0.1
 
 dev_dependencies:
   flutter_test:

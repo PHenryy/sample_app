@@ -1,66 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sample_app/models/nav.dart';
+import 'package:sample_app/templates/nav_template.dart';
 import 'package:sample_app/widgets/base_app_bar.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:sample_app/widgets/text_carousel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sample_app/product/product.dart';
+import 'package:sample_app/product/product_list_item_template.dart';
 
-class Category {
-  const Category({this.title, this.icon});
-
-  final String title;
-  final IconData icon;
-}
-
-const List<Category> categories = const <Category>[
-  const Category(title: '活动专区', icon: Icons.ac_unit),
-  const Category(title: '商品分类', icon: Icons.ac_unit),
-  const Category(title: '积分商城', icon: Icons.ac_unit),
-  const Category(title: '合作机构', icon: Icons.ac_unit),
-  const Category(title: '防伪查询', icon: Icons.ac_unit),
-  const Category(title: '媓钻风采', icon: Icons.ac_unit),
-  const Category(title: '专家问诊', icon: Icons.ac_unit),
-  const Category(title: '护肤课堂', icon: Icons.ac_unit),
+const List<Nav> _navs = const <Nav>[
+  const Nav(label: '活动专区', icon: Icons.ac_unit),
+  const Nav(label: '商品分类', icon: Icons.ac_unit),
+  const Nav(label: '积分商城', icon: Icons.ac_unit),
+  const Nav(label: '合作机构', icon: Icons.ac_unit),
+  const Nav(label: '防伪查询', icon: Icons.ac_unit),
+  const Nav(label: '媓钻风采', icon: Icons.ac_unit),
+  const Nav(label: '专家问诊', icon: Icons.ac_unit),
+  const Nav(label: '护肤课堂', icon: Icons.ac_unit),
 ];
-
-class CategoryTemplate extends StatelessWidget {
-  const CategoryTemplate({Key key, this.category}) : super(key: key);
-  final Category category;
-
-  @override
-  Widget build(BuildContext context) {
-    return Flex(
-      direction: Axis.vertical,
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        Icon(
-          category.icon,
-          size: 42.8,
-        ),
-        SizedBox(
-          height: 15.0,
-        ),
-        Text(
-          category.title,
-          style: TextStyle(
-            fontSize: 12.0,
-          ),
-        )
-      ],
-    );
-  }
-}
-
-class Product {
-  Product({this.image, this.title, this.price, this.sales});
-
-  final String image;
-  final String title;
-  final double price;
-  final int sales;
-}
 
 List<Product> productList = <Product>[
   Product(
@@ -89,101 +48,14 @@ List<Product> productList = <Product>[
   ),
 ];
 
-class ProductItemTemplate extends StatelessWidget {
-  ProductItemTemplate({this.product});
-  final Product product;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Column(
-        children: <Widget>[
-          AspectRatio(
-            aspectRatio: 0.96,
-            child: Image.asset(
-              product.image,
-              fit: BoxFit.cover,
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    product.title,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                    style: TextStyle(
-                      fontSize: 12.5,
-                      color: Color(0xFF333333),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 5.0,
-                  ),
-                  Text(
-                    '销量：${product.sales}',
-                    style: TextStyle(
-                      color: Color(0xFFAAA9A9),
-                      fontSize: 11.0,
-                    ),
-                  ),
-                  Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          '￥${product.price}',
-                          style: TextStyle(
-                            color: Color(0xFFFF5454),
-                          ),
-                        ),
-                        Container(
-                          width: 40.5,
-                          height: 22.5,
-                          child: FlatButton(
-                            padding: EdgeInsets.zero,
-                            shape: RoundedRectangleBorder(
-                                side: BorderSide(
-                                    color: Color(0xFFFF5454),
-                                    width: 1,
-                                    style: BorderStyle.solid),
-                                borderRadius: BorderRadius.circular(2.5)),
-                            onPressed: () {},
-                            child: Text(
-                              '购买',
-                              style: TextStyle(
-                                color: Color(0xFFFF5454),
-                                fontSize: 12.5,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-}
-
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil(width: 375, height: 1500)..init(context);
+    ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)..init(context);
 
-    SystemUiOverlayStyle systemUiOverlayStyle =
-        SystemUiOverlayStyle(statusBarColor: Color(0xFF34BBE7));
-    SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+    // SystemUiOverlayStyle systemUiOverlayStyle =
+    //     SystemUiOverlayStyle(statusBarColor: Color(0xFF34BBE7));
+    // SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
 
     return Scaffold(
       appBar: BaseAppBar(),
@@ -270,9 +142,9 @@ class Home extends StatelessWidget {
                         shrinkWrap: true,
                         crossAxisCount: 4,
                         physics: NeverScrollableScrollPhysics(),
-                        children: categories.map((item) {
-                          return CategoryTemplate(
-                            category: item,
+                        children: _navs.map((item) {
+                          return NavTemplate(
+                            nav: item,
                           );
                         }).toList(),
                       ),
@@ -289,7 +161,7 @@ class Home extends StatelessWidget {
                             ),
                             alignment: Alignment.center,
                             child: Text(
-                              '热���产品',
+                              '热销产品',
                               style: TextStyle(
                                 fontSize: 15.0,
                                 color: Color(0xFF333333),
@@ -307,7 +179,7 @@ class Home extends StatelessWidget {
                             ),
                             physics: NeverScrollableScrollPhysics(),
                             children: productList.map((item) {
-                              return ProductItemTemplate(
+                              return ProductListItemTemplate(
                                 product: item,
                               );
                             }).toList(),

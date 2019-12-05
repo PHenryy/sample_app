@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../screens/home.dart';
+import '../home/home.dart';
 import '../screens/products.dart';
-import '../screens/cart.dart';
-import '../screens/user.dart';
+import '../cart/cart.dart';
+import '../user/user.dart';
 import '../widgets/icecons_icons.dart';
 
 class BottomNavation extends StatefulWidget {
