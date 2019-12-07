@@ -600,11 +600,11 @@ class _ProductIntroState extends State<ProductIntro>
     );
     _curve = CurvedAnimation(
       parent: _controller,
-      curve: Curves.easeIn,
+      curve: Curves.easeInOut,
     );
     _offset = Tween<Offset>(
       begin: Offset(0, 1),
-      end: Offset.zero,
+      end: Offset(0, 0.1),
     ).animate(_curve)
       ..addListener(() {
         setState(() {});
@@ -615,16 +615,30 @@ class _ProductIntroState extends State<ProductIntro>
   Widget build(BuildContext context) {
     return SlideTransition(
       position: _offset,
-      child: Container(
-        color: Colors.white,
-        child: ListView.builder(
-          physics: BouncingScrollPhysics(),
-          itemCount: 30,
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: Text('$index'),
-            );
-          },
+      child: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Container(
+              color: Color(0xFFEEEEEE),
+              height: ScreenUtil().setWidth(100),
+              child: Center(
+                child: Text('返回商品'),
+              ),
+            ),
+            Container(
+              color: Colors.white,
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: 30,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text('$index'),
+                  );
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
