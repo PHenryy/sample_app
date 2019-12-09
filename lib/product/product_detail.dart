@@ -35,21 +35,15 @@ class ProductDetail extends StatelessWidget {
         appBar: BaseAppBar(),
         body: Column(
           children: <Widget>[
-            new BottomSheetController(),
+            // new BottomSheetController(),
             Expanded(
-              child: Stack(
-                children: <Widget>[
-                  // 商品信息
-                  new ProductInfo(
-                    product: product,
-                    share: _share,
-                    highlightColor: _highlightColor,
-                    tags: _tags,
-                  ),
-                  ProductIntro(
-                    key: productIntroGK,
-                  ),
-                ],
+              child: Container(
+                child: ProductInfo(
+                  product: product,
+                  share: _share,
+                  highlightColor: _highlightColor,
+                  tags: _tags,
+                ),
               ),
             ),
             // 操作
@@ -401,6 +395,14 @@ class ProductInfo extends StatelessWidget {
           ),
           // 选择数量
           BaseListTile(
+            onPressed: () {
+              showModalBottomSheet<void>(
+                context: context,
+                builder: (BuildContext context) {
+                  return ProductActionPanel();
+                },
+              );
+            },
             title: '请选择数量',
             trailing: Icon(
               Icons.chevron_right,
@@ -472,6 +474,27 @@ class ProductInfo extends StatelessWidget {
               ],
             ),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class ProductActionPanel extends StatelessWidget {
+  const ProductActionPanel({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: ScreenUtil().setWidth(760),
+      child: Column(
+        children: <Widget>[
+          Expanded(
+            child: Text('123'),
+          ),
+          RaisedButton(),
         ],
       ),
     );
