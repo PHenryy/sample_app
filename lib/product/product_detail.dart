@@ -36,6 +36,7 @@ class ProductDetail extends StatelessWidget {
         appBar: BaseAppBar(),
         body: Column(
           children: <Widget>[
+<<<<<<< HEAD
             // 商品信息
             Expanded(
               child: Container(
@@ -51,6 +52,16 @@ class ProductDetail extends StatelessWidget {
                       ),
                     ],
                   ),
+=======
+            // new BottomSheetController(),
+            Expanded(
+              child: Container(
+                child: ProductInfo(
+                  product: product,
+                  share: _share,
+                  highlightColor: _highlightColor,
+                  tags: _tags,
+>>>>>>> 466daa86850e1d49b2d0707ff4b717097360d48f
                 ),
               ),
             ),
