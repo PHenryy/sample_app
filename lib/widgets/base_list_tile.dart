@@ -2,18 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BaseListTile extends StatelessWidget {
-  BaseListTile({this.title, this.height = 85, this.trailing});
+  BaseListTile({this.title, this.height = 85, this.trailing, this.onPressed});
 
   final String title;
   final double height;
   final Widget trailing;
+  final Function onPressed;
 
   @override
   Widget build(BuildContext context) {
     double _height = ScreenUtil().setWidth(height);
 
     return InkWell(
-      onTap: () {},
+      onTap: onPressed,
       child: Container(
         height: _height,
         color: Colors.white,

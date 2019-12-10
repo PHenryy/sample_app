@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sample_app/cart/counter.dart';
 import 'package:sample_app/models/nav.dart';
 import 'package:sample_app/product/product.dart';
 import 'package:sample_app/widgets/base_app_bar.dart';
@@ -35,21 +36,22 @@ class ProductDetail extends StatelessWidget {
         appBar: BaseAppBar(),
         body: Column(
           children: <Widget>[
-            new BottomSheetController(),
+            // 商品信息
             Expanded(
-              child: Stack(
-                children: <Widget>[
-                  // 商品信息
-                  new ProductInfo(
-                    product: product,
-                    share: _share,
-                    highlightColor: _highlightColor,
-                    tags: _tags,
+              child: Container(
+                child: SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
+                  child: Column(
+                    children: <Widget>[
+                      new ProductInfo(
+                        product: product,
+                        share: _share,
+                        highlightColor: _highlightColor,
+                        tags: _tags,
+                      ),
+                    ],
                   ),
-                  ProductIntro(
-                    key: productIntroGK,
-                  ),
-                ],
+                ),
               ),
             ),
             // 操作
@@ -401,6 +403,143 @@ class ProductInfo extends StatelessWidget {
           ),
           // 选择数量
           BaseListTile(
+            onPressed: () {
+              showModalBottomSheet(
+                  context: context,
+                  backgroundColor: Colors.transparent,
+                  builder: (BuildContext context) {
+                    return Container(
+                      height: ScreenUtil().setWidth(817),
+                      child: Stack(
+                        children: <Widget>[
+                          Container(
+                            padding: EdgeInsets.only(
+                              top: ScreenUtil().setWidth(56),
+                            ),
+                            child: Container(
+                              color: Colors.white,
+                            ),
+                          ),
+                          Container(
+                            child: Column(
+                              children: <Widget>[
+                                Expanded(
+                                  child: Container(
+                                    margin: EdgeInsets.only(
+                                      left: ScreenUtil().setWidth(18),
+                                      right: ScreenUtil().setWidth(18),
+                                    ),
+                                    child: Column(
+                                      children: <Widget>[
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Wrap(
+                                              children: <Widget>[
+                                                Container(
+                                                  width: ScreenUtil()
+                                                      .setWidth(181),
+                                                  height: ScreenUtil()
+                                                      .setWidth(181),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                      ScreenUtil().setWidth(5),
+                                                    ),
+                                                    image: DecorationImage(
+                                                      fit: BoxFit.cover,
+                                                      image: AssetImage(
+                                                        'assets/images/i1.jpg',
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Container(
+                                                  padding: EdgeInsets.only(
+                                                    top: ScreenUtil()
+                                                        .setWidth(84),
+                                                  ),
+                                                  margin: EdgeInsets.only(
+                                                    left: ScreenUtil()
+                                                        .setWidth(24),
+                                                  ),
+                                                  child: Text(
+                                                    '￥ 181.00',
+                                                    style: TextStyle(
+                                                      fontSize: ScreenUtil()
+                                                          .setSp(32),
+                                                      color: Color(0xFFFF5454),
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                            Container(
+                                              padding: EdgeInsets.only(
+                                                top: ScreenUtil().setWidth(74),
+                                              ),
+                                              child: Icon(Icons.close),
+                                            ),
+                                          ],
+                                        ),
+                                        Divider(
+                                          height: ScreenUtil().setWidth(44),
+                                        ),
+                                        Container(
+                                          padding: EdgeInsets.only(
+                                            left: ScreenUtil().setWidth(6),
+                                            right: ScreenUtil().setWidth(3),
+                                          ),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: <Widget>[
+                                              Text(
+                                                '数量',
+                                                style: TextStyle(
+                                                  fontSize:
+                                                      ScreenUtil().setSp(28),
+                                                  color: Color(0xFF6E6E6E),
+                                                ),
+                                              ),
+                                              Counter(),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                ConstrainedBox(
+                                  constraints: BoxConstraints(
+                                    minWidth: double.infinity,
+                                    minHeight: ScreenUtil().setWidth(92),
+                                  ),
+                                  child: RaisedButton(
+                                    onPressed: () {},
+                                    color: Color(0xFFFD5454),
+                                    child: Text(
+                                      '确定',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: ScreenUtil().setSp(28),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  });
+            },
             title: '请选择数量',
             trailing: Icon(
               Icons.chevron_right,
@@ -478,105 +617,6 @@ class ProductInfo extends StatelessWidget {
   }
 }
 
-class BottomSheetController extends StatefulWidget {
-  const BottomSheetController({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  _BottomSheetControllerState createState() => _BottomSheetControllerState();
-}
-
-class _BottomSheetControllerState extends State<BottomSheetController> {
-  bool bottomSheetVisible = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: ScreenUtil().setWidth(84),
-      color: Colors.white,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          new BottomSheetControllerItem(
-            label: '商品',
-            selected: !bottomSheetVisible,
-            onPressed: () {
-              if (bottomSheetVisible) {
-                setState(() {
-                  bottomSheetVisible = false;
-                  productIntroGK.currentState.hide();
-                });
-              }
-            },
-          ),
-          new BottomSheetControllerItem(
-            label: '详情',
-            selected: bottomSheetVisible,
-            onPressed: () {
-              setState(() {
-                if (!bottomSheetVisible) {
-                  setState(() {
-                    bottomSheetVisible = true;
-                    productIntroGK.currentState.show();
-                  });
-                }
-              });
-            },
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class BottomSheetControllerItem extends StatelessWidget {
-  const BottomSheetControllerItem({
-    Key key,
-    @required this.label,
-    @required this.onPressed,
-    this.selected = false,
-  }) : super(key: key);
-
-  final String label;
-  final Function() onPressed;
-  final bool selected;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onPressed,
-      child: Container(
-        width: ScreenUtil().setWidth(300),
-        child: Stack(
-          children: <Widget>[
-            Center(
-              child: Text(
-                label,
-                style: TextStyle(
-                  fontSize: ScreenUtil().setSp(30),
-                  color: selected ? Color(0xFFEF4F4E) : Color(0xFF666666),
-                ),
-              ),
-            ),
-            selected
-                ? Positioned(
-                    left: 0,
-                    bottom: 0,
-                    child: Container(
-                      color: Color(0xFFEF4F4E),
-                      width: ScreenUtil().setWidth(300),
-                      height: ScreenUtil().setWidth(3),
-                    ),
-                  )
-                : Container(),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 class ProductIntro extends StatefulWidget {
   ProductIntro({Key key}) : super(key: key);
 
@@ -600,11 +640,11 @@ class _ProductIntroState extends State<ProductIntro>
     );
     _curve = CurvedAnimation(
       parent: _controller,
-      curve: Curves.easeInOut,
+      curve: Curves.elasticInOut,
     );
     _offset = Tween<Offset>(
       begin: Offset(0, 1),
-      end: Offset(0, 0.1),
+      end: Offset(0, 0),
     ).animate(_curve)
       ..addListener(() {
         setState(() {});
@@ -616,6 +656,7 @@ class _ProductIntroState extends State<ProductIntro>
     return SlideTransition(
       position: _offset,
       child: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Column(
           children: <Widget>[
             Container(

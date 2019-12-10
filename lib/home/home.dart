@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:sample_app/models/nav.dart';
 import 'package:sample_app/templates/nav_template.dart';
 import 'package:sample_app/widgets/base_app_bar.dart';
