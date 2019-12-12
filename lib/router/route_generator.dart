@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sample_app/home/home.dart';
+import 'package:sample_app/order/order_pay.dart';
 import 'package:sample_app/product/product.dart';
 import 'package:sample_app/widgets/base_app_bar.dart';
 import 'package:sample_app/product/product_detail.dart';
@@ -18,6 +19,8 @@ class RouteGenerator {
           return CupertinoPageRoute(builder: (_) => ProductDetail(args));
         }
         return _errorRoute();
+      case '/orderPay':
+        return CupertinoPageRoute(builder: (_) => OrderPay());
       // Validation of correct data type
       // if (args is String) {
       //   return MaterialPageRoute(

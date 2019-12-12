@@ -4,6 +4,7 @@ import 'package:sample_app/cart/counter.dart';
 import 'package:sample_app/models/nav.dart';
 import 'package:sample_app/product/product.dart';
 import 'package:sample_app/widgets/base_app_bar.dart';
+import 'package:sample_app/widgets/base_header.dart';
 import 'package:sample_app/widgets/base_list_tile.dart';
 
 final productIntroGK = GlobalKey<_ProductIntroState>();
@@ -36,23 +37,6 @@ class ProductDetail extends StatelessWidget {
         appBar: BaseAppBar(),
         body: Column(
           children: <Widget>[
-<<<<<<< HEAD
-            // 商品信息
-            Expanded(
-              child: Container(
-                child: SingleChildScrollView(
-                  physics: BouncingScrollPhysics(),
-                  child: Column(
-                    children: <Widget>[
-                      new ProductInfo(
-                        product: product,
-                        share: _share,
-                        highlightColor: _highlightColor,
-                        tags: _tags,
-                      ),
-                    ],
-                  ),
-=======
             // new BottomSheetController(),
             Expanded(
               child: Container(
@@ -61,7 +45,6 @@ class ProductDetail extends StatelessWidget {
                   share: _share,
                   highlightColor: _highlightColor,
                   tags: _tags,
->>>>>>> 466daa86850e1d49b2d0707ff4b717097360d48f
                 ),
               ),
             ),
@@ -413,7 +396,7 @@ class ProductInfo extends StatelessWidget {
             ),
           ),
           // 选择数量
-          BaseListTile(
+          BaseHeader(
             onPressed: () {
               showModalBottomSheet(
                   context: context,
@@ -532,7 +515,10 @@ class ProductInfo extends StatelessWidget {
                                     minHeight: ScreenUtil().setWidth(92),
                                   ),
                                   child: RaisedButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.of(context)
+                                          .pushNamed('/orderPay');
+                                    },
                                     color: Color(0xFFFD5454),
                                     child: Text(
                                       '确定',
