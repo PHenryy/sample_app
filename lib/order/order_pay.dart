@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sample_app/utils/dividers.dart';
+import 'package:sample_app/utils/text_styles.dart';
 import 'package:sample_app/widgets/base_app_bar.dart';
 import 'package:sample_app/widgets/base_header.dart';
 import 'package:sample_app/widgets/base_list_tile.dart';
@@ -77,9 +79,9 @@ class OrderPay extends StatelessWidget {
                   ),
                   Container(
                     color: Colors.white,
-                    padding: EdgeInsets.only(
-                      bottom: ScreenUtil().setWidth(150),
-                    ),
+                    // padding: EdgeInsets.only(
+                    //   bottom: ScreenUtil().setWidth(150),
+                    // ),
                     child: Column(
                       children: <Widget>[
                         BaseHeader(
@@ -87,35 +89,44 @@ class OrderPay extends StatelessWidget {
                           height: 70,
                           tailingIcon: Icons.shop,
                         ),
-                        Divider(
-                          thickness: 0.0,
-                          height: 0.0,
-                          indent: ScreenUtil().setWidth(24),
-                          endIndent: ScreenUtil().setWidth(24),
-                        ),
+                        Dividers.paddedBoth,
                         BaseListTile(
                           title: '媓钻之恋 甘草精华液',
                           subtitle: '10ml*2支',
                           text: '￥180',
                           subtext: '×3',
                         ),
-                        Divider(
-                          thickness: 0.0,
-                          height: 0.0,
-                          indent: ScreenUtil().setWidth(24),
-                          endIndent: ScreenUtil().setWidth(24),
-                        ),
+                        Dividers.paddedBoth,
                         BaseListTile(
                           title: '媓钻之恋 甘草精华液',
                           subtitle: '10ml*2支',
                           text: '￥180',
                           subtext: '×3',
                         ),
-                        Divider(
-                          thickness: 0.0,
-                          height: 0.0,
-                          indent: ScreenUtil().setWidth(24),
-                          endIndent: ScreenUtil().setWidth(24),
+                        Dividers.paddedBoth,
+                      ],
+                    ),
+                  ),
+                  BaseHeader(
+                    title: '',
+                    trailing: Wrap(
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          '共',
+                          style: TextStyles.body3,
+                        ),
+                        Text(
+                          '1',
+                          style: TextStyles.body3,
+                        ),
+                        Text(
+                          '件商品 共计：',
+                          style: TextStyles.body3,
+                        ),
+                        Text(
+                          '￥180',
+                          style: TextStyles.body3,
                         ),
                       ],
                     ),
@@ -136,13 +147,70 @@ class OrderPay extends StatelessWidget {
                       maxLength: 50,
                     ),
                   ),
+                  SizedBox(
+                    height: ScreenUtil().setWidth(20),
+                  ),
+                  BaseHeader(
+                    title: '商品小计',
+                    trailing: Text(
+                      '￥180',
+                      style: TextStyles.body3,
+                    ),
+                  ),
+                  Dividers.paddedBoth,
+                  BaseHeader(
+                    title: '运费',
+                    trailing: Text(
+                      '￥180',
+                      style: TextStyles.body3,
+                    ),
+                  ),
                 ],
               ),
             ),
           ),
           Container(
-            color: Colors.blue,
+            color: Colors.white,
             height: ScreenUtil().setWidth(100),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Text(
+                  '需付：',
+                  style: TextStyles.body3,
+                ),
+                Text(
+                  '￥180.00',
+                  style: TextStyles.body3,
+                ),
+                SizedBox(
+                  width: ScreenUtil().setWidth(22),
+                ),
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minHeight: double.infinity,
+                    minWidth: ScreenUtil().setWidth(240),
+                  ),
+                  child: RaisedButton(
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.zero,
+                    ),
+                    color: Theme.of(context).primaryColor,
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('/orderPayMethod');
+                    },
+                    child: Text(
+                      '立即支付',
+                      style: TextStyle(
+                        fontSize: ScreenUtil().setSp(28),
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           )
         ],
       ),

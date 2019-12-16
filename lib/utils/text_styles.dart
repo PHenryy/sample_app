@@ -8,6 +8,14 @@ class TextStyles {
   );
   static TextStyle body2 = TextStyle(
     fontSize: ScreenUtil().setSp(28),
-    color: Color(0xFF66666),
+    color: Color(0xFF666666),
+  );
+  static TextStyle body3 = TextStyle(
+    fontSize: ScreenUtil().setSp(26),
+    color: Color(0xFF323232),
+  );
+  static TextStyle body4 = TextStyle(
+    fontSize: ScreenUtil().setSp(28),
+    color: Color(0xFFFF5454),
   );
 }

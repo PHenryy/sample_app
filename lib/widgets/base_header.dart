@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BaseHeader extends StatelessWidget {
-  BaseHeader(
-      {this.title,
-      this.height = 85,
-      this.trailing,
-      this.tailingIcon,
-      this.onPressed});
+  BaseHeader({
+    this.title,
+    this.height = 85,
+    this.trailing,
+    this.tailingIcon,
+    this.onPressed,
+  });
 
   final String title;
   final double height;
