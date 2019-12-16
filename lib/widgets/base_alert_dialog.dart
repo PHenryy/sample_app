@@ -17,95 +17,21 @@ class BaseAlertDialog extends StatelessWidget {
     this.content,
     this.contentPadding = const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 24.0),
     this.contentTextStyle,
-    this.actions,
     this.backgroundColor,
     this.elevation,
-    this.semanticLabel,
-    this.shape,
+    this.onConfirm,
   })  : assert(contentPadding != null),
         super(key: key);
 
-  /// The (optional) title of the dialog is displayed in a large font at the top
-  /// of the dialog.
-  ///
-  /// Typically a [Text] widget.
   final Widget title;
-
-  /// Padding around the title.
-  ///
-  /// If there is no title, no padding will be provided. Otherwise, this padding
-  /// is used.
-  ///
-  /// If the [content] is not null, then no bottom padding is
-  /// provided (but see [contentPadding]). If it _is_ null, then an extra 20
-  /// pixels of bottom padding is added to separate the [title] from the
-  /// [actions].
   final EdgeInsetsGeometry titlePadding;
-
-  /// Style for the text in the [title] of this [AlertDialog].
-  ///
-  /// If null, [DialogTheme.titleTextStyle] is used, if that's null, defaults to
-  /// [ThemeData.textTheme.title].
   final TextStyle titleTextStyle;
-
-  /// The (optional) content of the dialog is displayed in the center of the
-  /// dialog in a lighter font.
-  ///
-  /// Typically this is a [SingleChildScrollView] that contains the dialog's
-  /// message. As noted in the [AlertDialog] documentation, it's important
-  /// to use a [SingleChildScrollView] if there's any risk that the content
-  /// will not fit.
   final Widget content;
-
-  /// Padding around the content.
-  ///
-  /// If there is no content, no padding will be provided. Otherwise, padding of
-  /// 20 pixels is provided above the content to separate the content from the
-  /// title, and padding of 24 pixels is provided on the left, right, and bottom
-  /// to separate the content from the other edges of the dialog.
   final EdgeInsetsGeometry contentPadding;
-
-  /// Style for the text in the [content] of this [AlertDialog].
-  ///
-  /// If null, [DialogTheme.contentTextStyle] is used, if that's null, defaults
-  /// to [ThemeData.textTheme.subhead].
   final TextStyle contentTextStyle;
-
-  /// The (optional) set of actions that are displayed at the bottom of the
-  /// dialog.
-  ///
-  /// Typically this is a list of [FlatButton] widgets.
-  ///
-  /// These widgets will be wrapped in a [ButtonBar], which introduces 8 pixels
-  /// of padding on each side.
-  ///
-  /// If the [title] is not null but the [content] _is_ null, then an extra 20
-  /// pixels of padding is added above the [ButtonBar] to separate the [title]
-  /// from the [actions].
-  final List<Widget> actions;
-
-  /// {@macro flutter.material.dialog.backgroundColor}
   final Color backgroundColor;
-
-  /// {@macro flutter.material.dialog.elevation}
-  /// {@macro flutter.material.material.elevation}
   final double elevation;
-
-  /// The semantic label of the dialog used by accessibility frameworks to
-  /// announce screen transitions when the dialog is opened and closed.
-  ///
-  /// If this label is not provided, a semantic label will be inferred from the
-  /// [title] if it is not null.  If there is no title, the label will be taken
-  /// from [MaterialLocalizations.alertDialogLabel].
-  ///
-  /// See also:
-  ///
-  ///  * [SemanticsConfiguration.isRouteName], for a description of how this
-  ///    value is used.
-  final String semanticLabel;
-
-  /// {@macro flutter.material.dialog.shape}
-  final ShapeBorder shape;
+  final Function onConfirm;
 
   @override
   Widget build(BuildContext context) {
@@ -146,10 +72,56 @@ class BaseAlertDialog extends StatelessWidget {
                 ),
               ),
             ),
-          if (actions != null)
-            ButtonBar(
-              children: actions,
+          Container(
+            height: ScreenUtil().setWidth(84),
+            decoration: BoxDecoration(
+              border: Border(
+                top: BorderSide(
+                  width: ScreenUtil().setWidth(1),
+                  color: Color(0xFFD9D9D9),
+                ),
+              ),
             ),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minHeight: double.infinity,
+                    ),
+                    child: FlatButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text(
+                        '取消',
+                        style: TextStyle(
+                          fontSize: ScreenUtil().setSp(30),
+                          color: Color(0xFF666666),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                VerticalDivider(
+                  color: Color(0xFFD9D9D9),
+                  width: ScreenUtil().setWidth(1),
+                ),
+                Expanded(
+                  child: FlatButton(
+                    onPressed: onConfirm,
+                    child: Text(
+                      '确认',
+                      style: TextStyle(
+                        fontSize: ScreenUtil().setSp(30),
+                        color: Color(0xFF666666),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -157,7 +129,9 @@ class BaseAlertDialog extends StatelessWidget {
     return Dialog(
       backgroundColor: backgroundColor,
       elevation: elevation,
-      shape: shape,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(ScreenUtil().setWidth(20)),
+      ),
       child: dialogChild,
     );
   }

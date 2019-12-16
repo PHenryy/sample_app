@@ -55,15 +55,6 @@ class OrderPayMethod extends StatelessWidget {
                   return BaseAlertDialog(
                     title: Text("提醒"),
                     content: Text("确定您要取消申请吗？"),
-                    actions: <Widget>[
-                      // usually buttons at the bottom of the dialog
-                      new FlatButton(
-                        child: new Text("Close"),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
                   );
                 },
               );
