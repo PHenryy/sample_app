@@ -26,7 +26,7 @@ class OrderPayMethod extends StatelessWidget {
                     ),
                     trailing: Text(
                       'SH2019112608888888888888',
-                      style: TextStyles.body3,
+                      style: TextStyles.body1sm,
                     ),
                   ),
                   Dividers.paddedBoth,
@@ -55,6 +55,9 @@ class OrderPayMethod extends StatelessWidget {
                   return BaseAlertDialog(
                     title: Text("提醒"),
                     content: Text("确定您要取消申请吗？"),
+                    onConfirm: () {
+                      Navigator.of(context).pushNamed('/payResult');
+                    },
                   );
                 },
               );
@@ -85,7 +88,7 @@ class OrderPayMethod extends StatelessWidget {
                               Icon(Icons.sms_failed),
                               Text(
                                 '微信安全支付',
-                                style: TextStyles.body3,
+                                style: TextStyles.body1sm,
                               ),
                             ],
                           ),

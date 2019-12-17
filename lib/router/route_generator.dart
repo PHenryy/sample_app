@@ -1,8 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sample_app/home/home.dart';
+import 'package:sample_app/order/order_detail.dart';
 import 'package:sample_app/order/order_pay.dart';
 import 'package:sample_app/order/order_pay_method.dart';
+import 'package:sample_app/order/order_refund.dart';
+import 'package:sample_app/order/order_refund_result.dart';
+import 'package:sample_app/order/pay_result.dart';
 import 'package:sample_app/product/product.dart';
 import 'package:sample_app/widgets/base_app_bar.dart';
 import 'package:sample_app/product/product_detail.dart';
@@ -24,6 +28,14 @@ class RouteGenerator {
         return CupertinoPageRoute(builder: (_) => OrderPay());
       case '/orderPayMethod':
         return CupertinoPageRoute(builder: (_) => OrderPayMethod());
+      case '/payResult':
+        return CupertinoPageRoute(builder: (_) => PayResult());
+      case '/orderDetail':
+        return CupertinoPageRoute(builder: (_) => OrderDetail());
+      case '/orderRefund':
+        return CupertinoPageRoute(builder: (_) => OrderRefund());
+      case '/orderRefundResult':
+        return CupertinoPageRoute(builder: (_) => OrderRefundResult());
       // Validation of correct data type
       // if (args is String) {
       //   return MaterialPageRoute(

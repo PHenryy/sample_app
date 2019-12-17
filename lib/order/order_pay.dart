@@ -114,19 +114,19 @@ class OrderPay extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           '共',
-                          style: TextStyles.body3,
+                          style: TextStyles.body1sm,
                         ),
                         Text(
                           '1',
-                          style: TextStyles.body3,
+                          style: TextStyles.body1sm,
                         ),
                         Text(
                           '件商品 共计：',
-                          style: TextStyles.body3,
+                          style: TextStyles.body1sm,
                         ),
                         Text(
                           '￥180',
-                          style: TextStyles.body3,
+                          style: TextStyles.body1sm,
                         ),
                       ],
                     ),
@@ -154,7 +154,7 @@ class OrderPay extends StatelessWidget {
                     title: '商品小计',
                     trailing: Text(
                       '￥180',
-                      style: TextStyles.body3,
+                      style: TextStyles.body1sm,
                     ),
                   ),
                   Dividers.paddedBoth,
@@ -162,7 +162,7 @@ class OrderPay extends StatelessWidget {
                     title: '运费',
                     trailing: Text(
                       '￥180',
-                      style: TextStyles.body3,
+                      style: TextStyles.body1sm,
                     ),
                   ),
                 ],
@@ -177,11 +177,11 @@ class OrderPay extends StatelessWidget {
               children: <Widget>[
                 Text(
                   '需付：',
-                  style: TextStyles.body3,
+                  style: TextStyles.body1sm,
                 ),
                 Text(
                   '￥180.00',
-                  style: TextStyles.body3,
+                  style: TextStyles.body1sm,
                 ),
                 SizedBox(
                   width: ScreenUtil().setWidth(22),
