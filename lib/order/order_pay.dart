@@ -4,9 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sample_app/utils/dividers.dart';
 import 'package:sample_app/utils/text_styles.dart';
 import 'package:sample_app/widgets/base_app_bar.dart';
+import 'package:sample_app/widgets/base_fields.dart';
 import 'package:sample_app/widgets/base_header.dart';
 import 'package:sample_app/widgets/base_list_tile.dart';
-import 'package:sample_app/widgets/text_field_item.dart';
 
 class OrderPay extends StatelessWidget {
   @override

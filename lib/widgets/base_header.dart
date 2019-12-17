@@ -8,6 +8,7 @@ class BaseHeader extends StatelessWidget {
     this.trailing,
     this.tailingIcon,
     this.onPressed,
+    this.backgroundColor = Colors.white,
   });
 
   final String title;
@@ -15,6 +16,7 @@ class BaseHeader extends StatelessWidget {
   final Widget trailing;
   final IconData tailingIcon;
   final Function onPressed;
+  final Color backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class BaseHeader extends StatelessWidget {
       onTap: onPressed,
       child: Container(
         height: _height,
-        color: Colors.white,
+        color: backgroundColor,
         padding: EdgeInsets.only(
           left: ScreenUtil().setWidth(23),
           right: ScreenUtil().setWidth(23),

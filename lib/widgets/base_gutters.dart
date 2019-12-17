@@ -6,6 +6,6 @@ class Gutters {
     width: ScreenUtil().setWidth(16),
   );
   static Widget verticalGutter = SizedBox(
-    width: ScreenUtil().setWidth(20),
+    height: ScreenUtil().setWidth(20),
   );
 }
