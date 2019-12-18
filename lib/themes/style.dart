@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 ThemeData appTheme() {
   return ThemeData(
     primaryColor: Color(0xFF34BBE7),
+    accentColor: Color(0xFFFF5454),
     scaffoldBackgroundColor: Color(0xFFF9F9F8),
     textTheme: TextTheme(
       body1: TextStyle(

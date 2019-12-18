@@ -19,7 +19,11 @@ class User extends StatelessWidget {
       Nav(label: 'xxxx', icon: Icons.ac_unit),
       Nav(label: 'xxxx', icon: Icons.ac_unit),
       Nav(label: 'xxxx', icon: Icons.ac_unit),
-      Nav(label: 'xxxx', icon: Icons.ac_unit),
+      Nav(
+        label: '收货地址',
+        icon: Icons.ac_unit,
+        routeName: '/user/addresses',
+      ),
       Nav(label: 'xxxx', icon: Icons.ac_unit),
       Nav(label: 'xxxx', icon: Icons.ac_unit),
     ];

@@ -15,6 +15,7 @@ class BaseField extends StatelessWidget {
     this.height = 100,
     this.content,
     this.tailingIcon,
+    this.trailingIcon,
     this.onPressed,
     this.contentStyle,
     this.withDivider = false,
@@ -25,6 +26,7 @@ class BaseField extends StatelessWidget {
   final double height;
   final String content;
   final IconData tailingIcon;
+  final IconData trailingIcon;
   final Function onPressed;
   final TextStyle contentStyle;
   final bool withDivider;
@@ -43,10 +45,7 @@ class BaseField extends StatelessWidget {
         height: _height,
         color: Colors.white,
         child: Container(
-          margin: EdgeInsets.only(
-            left: ScreenUtil().setWidth(23),
-            right: ScreenUtil().setWidth(23),
-          ),
+          margin: Paddings.fieldPadding,
           decoration: BoxDecoration(
             border: withDivider
                 ? Border(
@@ -86,11 +85,17 @@ class BaseField extends StatelessWidget {
                         ),
                 ],
               ),
-              if (content != null)
-                Text(
-                  content,
-                  style: defaultContentStyle.merge(contentStyle),
-                ),
+              Wrap(
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: <Widget>[
+                  if (content != null)
+                    Text(
+                      content,
+                      style: defaultContentStyle.merge(contentStyle),
+                    ),
+                  trailingIcon == null ? Container() : Icon(trailingIcon),
+                ],
+              ),
             ],
           ),
         ),

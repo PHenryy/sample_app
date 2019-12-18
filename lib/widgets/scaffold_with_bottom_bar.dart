@@ -32,9 +32,6 @@ class ScaffoldWithBottomBar extends StatelessWidget {
           Container(
             color: Colors.white,
             height: ScreenUtil().setWidth(100),
-            padding: EdgeInsets.only(
-              right: ScreenUtil().setWidth(24),
-            ),
             child: footer,
           ),
         ],
