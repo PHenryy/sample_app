@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sample_app/models/nav.dart';
@@ -8,6 +9,7 @@ import 'package:sample_app/widgets/text_carousel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sample_app/product/product.dart';
 import 'package:sample_app/product/product_list_item_template.dart';
+import 'package:sample_app/http/http.dart';
 
 const List<Nav> _navs = const <Nav>[
   const Nav(label: '活动专区', icon: Icons.ac_unit),
@@ -61,80 +63,37 @@ class Home extends StatelessWidget {
       body: Container(
         child: Column(
           children: <Widget>[
-            Container(
-              color: Theme.of(context).primaryColor,
-              padding: EdgeInsets.fromLTRB(12.0, 10.0, 12.0, 10.0),
-              child: MaterialButton(
-                elevation: 0,
-                shape: StadiumBorder(),
-                color: Colors.white,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Icon(
-                      CupertinoIcons.search,
-                      color: Color(0xFFCCCCCC),
-                      size: 18.0,
-                    ),
-                    SizedBox(
-                      width: 3.5,
-                    ),
-                    Text(
-                      '搜索',
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        color: Color(0xFFCCCCCC),
-                      ),
-                    )
-                  ],
-                ),
-                onPressed: () {},
-              ),
-            ),
+            SearchBarWidget(),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
-                    SizedBox(
-                      width: double.infinity,
-                      height: MediaQuery.of(context).size.width / 1.875,
-                      child: new Swiper(
-                        itemBuilder: (BuildContext context, int index) {
-                          return new Image.asset(
-                            "assets/images/i1.jpg",
-                            fit: BoxFit.cover,
-                          );
-                        },
-                        itemCount: 3,
-                        pagination: new SwiperPagination(),
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.fromLTRB(23.0, 9.0, 23.0, 11.5),
-                      child: Row(
-                        children: <Widget>[
-                          Text(
-                            '热点',
-                            style: TextStyle(
-                              color: Color(0xFFC33E48),
-                              fontSize: 12.0,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 12.0,
-                          ),
-                          TextCarousel(
-                            texts: [
-                              '是否时代峰峻都删了复健科斯蒂芬',
-                              '是否时代峰峻都删了复健科斯蒂芬',
-                              '是否时代峰峻都删了复健科斯蒂芬',
-                              '是否时代峰峻都删了复健科斯蒂芬',
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
+                    BannersWidget(),
+                    // Container(
+                    //   padding: EdgeInsets.fromLTRB(23.0, 9.0, 23.0, 11.5),
+                    //   child: Row(
+                    //     children: <Widget>[
+                    //       Text(
+                    //         '热点',
+                    //         style: TextStyle(
+                    //           color: Color(0xFFC33E48),
+                    //           fontSize: 12.0,
+                    //         ),
+                    //       ),
+                    //       SizedBox(
+                    //         width: 12.0,
+                    //       ),
+                    //       TextCarousel(
+                    //         texts: [
+                    //           '是否时代峰峻都删了复健科斯蒂芬',
+                    //           '是否时代峰峻都删了复健科斯蒂芬',
+                    //           '是否时代峰峻都删了复健科斯蒂芬',
+                    //           '是否时代峰峻都删了复健科斯蒂芬',
+                    //         ],
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                     Container(
                       color: Colors.white,
                       child: GridView.count(
@@ -194,5 +153,147 @@ class Home extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class SearchBarWidget extends StatelessWidget {
+  const SearchBarWidget({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Theme.of(context).primaryColor,
+      padding: EdgeInsets.symmetric(
+        horizontal: ScreenUtil().setWidth(24),
+        vertical: ScreenUtil().setWidth(20),
+      ),
+      child: MaterialButton(
+        elevation: 0,
+        shape: StadiumBorder(),
+        color: Colors.white,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Icon(
+              CupertinoIcons.search,
+              color: Color(0xFFCCCCCC),
+              size: 18.0,
+            ),
+            SizedBox(
+              width: 3.5,
+            ),
+            Text(
+              '搜索',
+              style: TextStyle(
+                fontSize: 16.0,
+                color: Color(0xFFCCCCCC),
+              ),
+            )
+          ],
+        ),
+        onPressed: () {},
+      ),
+    );
+  }
+}
+
+class BannersWidget extends StatefulWidget {
+  BannersWidget({
+    Key key,
+  }) : super(key: key);
+  final BannerApiProvider _bannerApiProvider = BannerApiProvider();
+
+  @override
+  _BannersWidgetState createState() => _BannersWidgetState();
+}
+
+class _BannersWidgetState extends State<BannersWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: widget._bannerApiProvider.getBanner(),
+      builder: (context, snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.none:
+          case ConnectionState.waiting:
+          case ConnectionState.active:
+            return Center(
+              child: SizedBox(
+                width: double.infinity,
+                height: MediaQuery.of(context).size.width / 1.875,
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              ),
+            );
+          case ConnectionState.done:
+            if (snapshot.hasError) {
+              return SizedBox(
+                width: double.infinity,
+                height: MediaQuery.of(context).size.width / 1.875,
+                child: Center(
+                  child: Text(snapshot.data.error),
+                ),
+              );
+            }
+            return SizedBox(
+              width: double.infinity,
+              height: MediaQuery.of(context).size.width / 1.875,
+              child: new Swiper(
+                itemBuilder: (BuildContext context, int index) {
+                  return new Image.network(
+                    snapshot.data.results[index].ossUrl,
+                    fit: BoxFit.cover,
+                  );
+                },
+                itemCount: snapshot.data.results.length,
+                pagination: new SwiperPagination(),
+              ),
+            );
+        }
+      },
+    );
+  }
+}
+
+class Banner {
+  final String ossUrl;
+
+  Banner(this.ossUrl);
+  Banner.fromJson(Map<String, dynamic> json) : ossUrl = json['oss_url'];
+}
+
+class BannerResponse {
+  final List<Banner> results;
+  final String error;
+
+  BannerResponse(this.results, this.error);
+
+  BannerResponse.fromJson(Map<String, dynamic> json)
+      : results = (json['data'] as List)
+            .map((item) => Banner.fromJson(item))
+            .toList(),
+        error = '';
+
+  BannerResponse.withError(String errorValue)
+      : results = List(),
+        error = errorValue;
+}
+
+class BannerApiProvider {
+  final String _endPoint = "/api/banners?position=1";
+  final Http _http = Http();
+
+  Future<BannerResponse> getBanner() async {
+    try {
+      Response response = await _http.get(_endPoint);
+      return BannerResponse.fromJson(response.data);
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return BannerResponse.withError("$error");
+    }
   }
 }
