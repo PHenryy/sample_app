@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sample_app/models/product.dart';
+import 'package:sample_app/utils/text_styles.dart';
 
 class ProductListItemTemplate extends StatelessWidget {
   ProductListItemTemplate({this.product});
@@ -17,15 +19,17 @@ class ProductListItemTemplate extends StatelessWidget {
           children: <Widget>[
             AspectRatio(
               aspectRatio: 0.96,
-              child: Image.asset(
-                product.image,
+              child: Image.network(
+                product.ossUrl,
                 fit: BoxFit.cover,
               ),
             ),
             Expanded(
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+                padding: EdgeInsets.symmetric(
+                  horizontal: ScreenUtil().setWidth(20),
+                  vertical: ScreenUtil().setWidth(10),
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -33,19 +37,16 @@ class ProductListItemTemplate extends StatelessWidget {
                       product.title,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
-                      style: TextStyle(
-                        fontSize: 12.5,
-                        color: Color(0xFF333333),
-                      ),
+                      style: TextStyles.body1,
                     ),
                     SizedBox(
                       height: 5.0,
                     ),
                     Text(
-                      '销量：${product.sales}',
+                      '销量：${product.saleAmount}',
                       style: TextStyle(
                         color: Color(0xFFAAA9A9),
-                        fontSize: 11.0,
+                        fontSize: ScreenUtil().setSp(22),
                       ),
                     ),
                     Expanded(
@@ -53,14 +54,14 @@ class ProductListItemTemplate extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text(
-                            '￥${product.price}',
+                            '￥${product.sellPrice}',
                             style: TextStyle(
                               color: Color(0xFFFF5454),
                             ),
                           ),
                           Container(
-                            width: 40.5,
-                            height: 22.5,
+                            width: ScreenUtil().setWidth(80),
+                            height: ScreenUtil().setWidth(45),
                             child: FlatButton(
                               padding: EdgeInsets.zero,
                               shape: RoundedRectangleBorder(
@@ -74,7 +75,7 @@ class ProductListItemTemplate extends StatelessWidget {
                                 '购买',
                                 style: TextStyle(
                                   color: Color(0xFFFF5454),
-                                  fontSize: 12.5,
+                                  fontSize: ScreenUtil().setSp(25),
                                 ),
                               ),
                             ),

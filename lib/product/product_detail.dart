@@ -174,14 +174,14 @@ class ProductInfo extends StatelessWidget {
       child: Column(
         children: <Widget>[
           // 图片
-          Container(
-            height: ScreenUtil().setWidth(750),
-            width: double.infinity,
-            child: Image.asset(
-              product.image,
-              fit: BoxFit.cover,
-            ),
-          ),
+          // Container(
+          //   height: ScreenUtil().setWidth(750),
+          //   width: double.infinity,
+          //   child: Image.asset(
+          //     product.image,
+          //     fit: BoxFit.cover,
+          //   ),
+          // ),
           // 商品介绍
           Container(
             color: Colors.white,
@@ -203,15 +203,15 @@ class ProductInfo extends StatelessWidget {
                         constraints: BoxConstraints(
                           maxWidth: ScreenUtil().setWidth(600),
                         ),
-                        child: Text(
-                          product.title,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: ScreenUtil().setSp(28),
-                            color: Color(0xFF333333),
-                          ),
-                        ),
+                        // child: Text(
+                        //   product.title,
+                        //   maxLines: 1,
+                        //   overflow: TextOverflow.ellipsis,
+                        //   style: TextStyle(
+                        //     fontSize: ScreenUtil().setSp(28),
+                        //     color: Color(0xFF333333),
+                        //   ),
+                        // ),
                       ),
                       Wrap(
                         direction: Axis.vertical,
@@ -233,18 +233,18 @@ class ProductInfo extends StatelessWidget {
                     ],
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.only(
-                    top: ScreenUtil().setWidth(21),
-                  ),
-                  child: Text(
-                    '￥ ${product.price}',
-                    style: TextStyle(
-                      fontSize: ScreenUtil().setSp(38),
-                      color: _highlightColor,
-                    ),
-                  ),
-                ),
+                // Container(
+                //   padding: EdgeInsets.only(
+                //     top: ScreenUtil().setWidth(21),
+                //   ),
+                //   child: Text(
+                //     '￥ ${product.price}',
+                //     style: TextStyle(
+                //       fontSize: ScreenUtil().setSp(38),
+                //       color: _highlightColor,
+                //     ),
+                //   ),
+                // ),
                 Container(
                   padding: EdgeInsets.only(
                     top: ScreenUtil().setWidth(27),

@@ -34,9 +34,6 @@ class _NavsWidgetState extends State<NavsWidget> {
     return FutureBuilder(
       future: widget._navApiProvider.getNavs(),
       builder: (context, snapshot) {
-        print('-------------------');
-        print(snapshot.data);
-        print('-------------------');
         if (snapshot.hasData) {
           return Container(
             color: Colors.white,

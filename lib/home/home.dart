@@ -2,38 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sample_app/home/banner/banner.dart';
 import 'package:sample_app/home/nav/nav.dart';
-import 'package:sample_app/models/product.dart';
+import 'package:sample_app/home/product/hot_products.dart';
 import 'package:sample_app/widgets/base_app_bar.dart';
 // import 'package:sample_app/widgets/text_carousel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sample_app/product/product_list_item_template.dart';
-
-List<Product> productList = <Product>[
-  Product(
-    image: 'assets/images/i1.jpg',
-    title: '媓钻之星 舒缓隔离防护喷雾150ml 夏季防晒必备夏季防晒必备夏季防晒必备',
-    price: 188.00,
-    sales: 281,
-  ),
-  Product(
-    image: 'assets/images/i1.jpg',
-    title: '媓钻之星 舒缓隔离防护喷雾150ml 夏季防晒必备',
-    price: 188.00,
-    sales: 281,
-  ),
-  Product(
-    image: 'assets/images/i1.jpg',
-    title: '保湿清透隔离霜 30ml',
-    price: 188.00,
-    sales: 281,
-  ),
-  Product(
-    image: 'assets/images/i1.jpg',
-    title: '保湿清透隔离霜 30ml',
-    price: 188.00,
-    sales: 281,
-  ),
-];
 
 class Home extends StatelessWidget {
   @override
@@ -100,22 +72,7 @@ class Home extends StatelessWidget {
                               ),
                             ),
                           ),
-                          GridView.count(
-                            childAspectRatio: 0.64444,
-                            crossAxisCount: 2,
-                            shrinkWrap: true,
-                            mainAxisSpacing: 9.0,
-                            crossAxisSpacing: 9.0,
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 9.0,
-                            ),
-                            physics: NeverScrollableScrollPhysics(),
-                            children: productList.map((item) {
-                              return ProductListItemTemplate(
-                                product: item,
-                              );
-                            }).toList(),
-                          ),
+                          HotProductsWidget(),
                         ],
                       ),
                     ),

@@ -1,4 +1,23 @@
 class Product {
+  int id;
+  String title;
+  String shortTitle;
+  int coverImg;
+  String sellPrice;
+  String originalPrice;
+  int saleAmount;
+  int cateId;
+  int totalAmount;
+  String province;
+  String city;
+  String label;
+  int freePostageNum;
+  String freePostagePrice;
+  String disFreeAddress;
+  int postType;
+  int postTemplatePrice;
+  String ossUrl;
+
   Product({
     this.id,
     this.title,
@@ -20,22 +39,47 @@ class Product {
     this.ossUrl,
   });
 
-  final int id;
-  final String title;
-  final String shortTitle;
-  final int coverImg;
-  final String sellPrice;
-  final String originalPrice;
-  final int saleAmount;
-  final int cateId;
-  final int totalAmount;
-  final String province;
-  final String city;
-  final String label;
-  final int freePostageNum;
-  final String freePostagePrice;
-  final String disFreeAddress;
-  final int postType;
-  final int postTemplatePrice;
-  final String ossUrl;
+  Product.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    title = json['title'];
+    shortTitle = json['short_title'];
+    coverImg = json['cover_img'];
+    sellPrice = json['sell_price'];
+    originalPrice = json['original_price'];
+    saleAmount = json['sale_amount'];
+    cateId = json['cate_id'];
+    totalAmount = json['total_amount'];
+    province = json['province'];
+    city = json['city'];
+    label = json['label'];
+    freePostageNum = json['free_postage_num'];
+    freePostagePrice = json['free_postage_price'];
+    disFreeAddress = json['dis_free_address'];
+    postType = json['post_type'];
+    postTemplatePrice = json['post_template_price'];
+    ossUrl = json['oss_url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['title'] = this.title;
+    data['short_title'] = this.shortTitle;
+    data['cover_img'] = this.coverImg;
+    data['sell_price'] = this.sellPrice;
+    data['original_price'] = this.originalPrice;
+    data['sale_amount'] = this.saleAmount;
+    data['cate_id'] = this.cateId;
+    data['total_amount'] = this.totalAmount;
+    data['province'] = this.province;
+    data['city'] = this.city;
+    data['label'] = this.label;
+    data['free_postage_num'] = this.freePostageNum;
+    data['free_postage_price'] = this.freePostagePrice;
+    data['dis_free_address'] = this.disFreeAddress;
+    data['post_type'] = this.postType;
+    data['post_template_price'] = this.postTemplatePrice;
+    data['oss_url'] = this.ossUrl;
+    return data;
+  }
 }
