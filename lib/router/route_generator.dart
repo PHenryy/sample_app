@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sample_app/home/home.dart';
+import 'package:sample_app/models/product.dart';
 import 'package:sample_app/order/order_detail.dart';
 import 'package:sample_app/order/order_pay.dart';
 import 'package:sample_app/order/order_pay_method.dart';
@@ -8,7 +9,6 @@ import 'package:sample_app/order/order_refund.dart';
 import 'package:sample_app/order/order_refund_result.dart';
 import 'package:sample_app/order/pay_result.dart';
 import 'package:sample_app/order/tracking_number.dart';
-import 'package:sample_app/product/product.dart';
 import 'package:sample_app/user/edit_user_address.dart';
 import 'package:sample_app/user/user_addresses.dart';
 import 'package:sample_app/widgets/base_app_bar.dart';

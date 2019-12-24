@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sample_app/cart/counter.dart';
-import 'package:sample_app/models/nav.dart';
-import 'package:sample_app/product/product.dart';
+import 'package:sample_app/home/nav/nav.dart';
+import 'package:sample_app/models/product.dart';
 import 'package:sample_app/widgets/base_app_bar.dart';
 import 'package:sample_app/widgets/base_header.dart';
 import 'package:sample_app/widgets/base_list_tile.dart';
@@ -14,16 +14,16 @@ class ProductDetail extends StatelessWidget {
 
   final Product product;
   final Nav _share = Nav(
-    icon: Icons.share,
-    label: '分享',
+    ossUrl: '',
+    title: '分享',
   );
   final Nav _fav = Nav(
-    icon: Icons.favorite,
-    label: '关注',
+    ossUrl: '',
+    title: '关注',
   );
   final Nav _shop = Nav(
-    icon: Icons.shop,
-    label: '店铺',
+    ossUrl: '',
+    title: '店铺',
   );
   final Color _highlightColor = Color(0xFFFF5B5A);
   final List<String> _tags = <String>[
@@ -63,12 +63,9 @@ class ProductDetail extends StatelessWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              Icon(
-                                _fav.icon,
-                                color: Color(0xFFFD5454),
-                              ),
+                              Image.network(_fav.ossUrl),
                               Text(
-                                _fav.label,
+                                _fav.title,
                                 style: TextStyle(
                                   fontSize: ScreenUtil().setSp(22),
                                   color: Color(0xFFFD5454),
@@ -84,12 +81,9 @@ class ProductDetail extends StatelessWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              Icon(
-                                _shop.icon,
-                                color: Color(0xFFFD5454),
-                              ),
+                              Image.network(_shop.ossUrl),
                               Text(
-                                _shop.label,
+                                _shop.title,
                                 style: TextStyle(
                                   fontSize: ScreenUtil().setSp(22),
                                   color: Color(0xFFFD5454),
@@ -223,13 +217,12 @@ class ProductInfo extends StatelessWidget {
                         direction: Axis.vertical,
                         crossAxisAlignment: WrapCrossAlignment.center,
                         children: <Widget>[
-                          Icon(
-                            _share.icon,
-                            color: _highlightColor,
-                            size: ScreenUtil().setWidth(33),
+                          Image.network(
+                            _share.ossUrl,
+                            width: ScreenUtil().setWidth(33),
                           ),
                           Text(
-                            _share.label,
+                            _share.title,
                             style: TextStyle(
                               fontSize: ScreenUtil().setSp(24),
                               color: _highlightColor,

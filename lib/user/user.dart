@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sample_app/models/nav.dart';
-import 'package:sample_app/templates/nav_template.dart';
+import 'package:sample_app/home/nav/nav.dart';
 import 'package:sample_app/widgets/arc_clipper.dart';
 import 'package:sample_app/widgets/base_app_bar.dart';
 
@@ -16,16 +15,15 @@ class User extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<Nav> _navTools = <Nav>[
-      Nav(label: 'xxxx', icon: Icons.ac_unit),
-      Nav(label: 'xxxx', icon: Icons.ac_unit),
-      Nav(label: 'xxxx', icon: Icons.ac_unit),
+      Nav(title: 'xxxx', ossUrl: ''),
+      Nav(title: 'xxxx', ossUrl: ''),
+      Nav(title: 'xxxx', ossUrl: ''),
       Nav(
-        label: '收货地址',
-        icon: Icons.ac_unit,
-        routeName: '/user/addresses',
+        title: '收货地址',
+        ossUrl: '',
       ),
-      Nav(label: 'xxxx', icon: Icons.ac_unit),
-      Nav(label: 'xxxx', icon: Icons.ac_unit),
+      Nav(title: 'xxxx', ossUrl: ''),
+      Nav(title: 'xxxx', ossUrl: ''),
     ];
 
     List<OrderNavItem> _orderNavs = <OrderNavItem>[
@@ -368,19 +366,19 @@ class User extends StatelessWidget {
                   Divider(
                     height: 1,
                   ),
-                  SizedBox(
-                    height: ScreenUtil().setWidth(400.0),
-                    child: GridView.count(
-                      childAspectRatio: 5 / 4,
-                      crossAxisCount: 3,
-                      physics: NeverScrollableScrollPhysics(),
-                      children: _navTools.map((item) {
-                        return NavTemplate(
-                          nav: item,
-                        );
-                      }).toList(),
-                    ),
-                  )
+                  // SizedBox(
+                  //   height: ScreenUtil().setWidth(400.0),
+                  //   child: GridView.count(
+                  //     childAspectRatio: 5 / 4,
+                  //     crossAxisCount: 3,
+                  //     physics: NeverScrollableScrollPhysics(),
+                  //     children: _navTools.map((item) {
+                  //       return NavWidget(
+                  //         nav: item,
+                  //       );
+                  //     }).toList(),
+                  //   ),
+                  // )
                 ],
               ),
             ),

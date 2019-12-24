@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sample_app/product/product.dart';
+import 'package:sample_app/models/product.dart';
 
 class ProductListItemTemplate extends StatelessWidget {
   ProductListItemTemplate({this.product});
