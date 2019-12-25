@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/native_imp.dart';
 
@@ -13,7 +16,14 @@ class Http extends DioForNative {
   );
 
   factory Http() {
-    _http.interceptors.add(LogInterceptor(responseBody: false));
+    // (_http.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+    //     (client) {
+    //   client.findProxy = (uri) {
+    //     return "PROXY 10.10.162.92:8888";
+    //   };
+    //   client.badCertificateCallback =
+    //       (X509Certificate cert, String host, int port) => Platform.isAndroid;
+    // };
     return _http;
   }
 

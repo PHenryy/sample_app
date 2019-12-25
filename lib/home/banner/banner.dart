@@ -19,45 +19,33 @@ class _BannersWidgetState extends State<BannersWidget> {
     return FutureBuilder(
       future: widget._bannerApiProvider.getBanner(),
       builder: (context, snapshot) {
-        print(snapshot);
-        switch (snapshot.connectionState) {
-          case ConnectionState.none:
-          case ConnectionState.waiting:
-          case ConnectionState.active:
-            return Center(
-              child: SizedBox(
-                width: double.infinity,
-                height: MediaQuery.of(context).size.width / 1.875,
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              ),
-            );
-          case ConnectionState.done:
-            if (snapshot.hasError) {
-              return SizedBox(
-                width: double.infinity,
-                height: MediaQuery.of(context).size.width / 1.875,
-                child: Center(
-                  child: Text(snapshot.data.error),
-                ),
-              );
-            }
-            return SizedBox(
-              width: double.infinity,
-              height: MediaQuery.of(context).size.width / 1.875,
-              child: new Swiper(
-                itemBuilder: (BuildContext context, int index) {
-                  return new Image.network(
-                    snapshot.data.results[index].ossUrl,
-                    fit: BoxFit.cover,
-                  );
-                },
-                itemCount: snapshot.data.results.length,
-                pagination: new SwiperPagination(),
-              ),
-            );
+        if (snapshot.hasData) {
+          return AspectRatio(
+            aspectRatio: 1.875,
+            child: Swiper(
+              itemBuilder: (BuildContext context, int index) {
+                return Image.network(
+                  snapshot.data.results[index].ossUrl,
+                  fit: BoxFit.cover,
+                );
+              },
+              itemCount: snapshot.data.results.length,
+              pagination: SwiperPagination(),
+            ),
+          );
+        } else if (snapshot.hasError) {
+          return Text("${snapshot.error}");
         }
+
+        return Center(
+          child: SizedBox(
+            width: double.infinity,
+            height: MediaQuery.of(context).size.width / 1.875,
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          ),
+        );
       },
     );
   }
