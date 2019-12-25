@@ -6,6 +6,7 @@ import 'package:sample_app/home/product/hot_products.dart';
 import 'package:sample_app/widgets/base_app_bar.dart';
 // import 'package:sample_app/widgets/text_carousel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sample_app/widgets/base_gutters.dart';
 
 class Home extends StatelessWidget {
   @override
@@ -59,20 +60,21 @@ class Home extends StatelessWidget {
                           Container(
                             color: Colors.white,
                             width: double.infinity,
-                            height: 35.0,
+                            height: ScreenUtil().setWidth(70),
                             margin: EdgeInsets.symmetric(
-                              vertical: 10.0,
+                              vertical: ScreenUtil().setWidth(20),
                             ),
                             alignment: Alignment.center,
                             child: Text(
                               '热销产品',
                               style: TextStyle(
-                                fontSize: 15.0,
+                                fontSize: ScreenUtil().setSp(30),
                                 color: Color(0xFF333333),
                               ),
                             ),
                           ),
                           HotProductsWidget(),
+                          Gutters.verticalGutter,
                         ],
                       ),
                     ),
