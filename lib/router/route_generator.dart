@@ -23,7 +23,7 @@ class RouteGenerator {
       case '/home':
         return CupertinoPageRoute(builder: (_) => Home());
       case '/product':
-        if (args is Product) {
+        if (args is int) {
           return CupertinoPageRoute(builder: (_) => ProductDetail(args));
         }
         return _errorRoute();

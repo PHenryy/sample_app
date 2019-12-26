@@ -3,16 +3,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sample_app/cart/counter.dart';
 import 'package:sample_app/home/nav/nav.dart';
 import 'package:sample_app/models/product.dart';
+import 'package:sample_app/product/product_info.dart';
+import 'package:sample_app/utils/paddings.dart';
+import 'package:sample_app/utils/text_styles.dart';
 import 'package:sample_app/widgets/base_app_bar.dart';
 import 'package:sample_app/widgets/base_header.dart';
-import 'package:sample_app/widgets/base_list_tile.dart';
 
 final productIntroGK = GlobalKey<_ProductIntroState>();
 
 class ProductDetail extends StatelessWidget {
-  ProductDetail(this.product);
+  ProductDetail(this.id);
 
-  final Product product;
+  final int id;
   final Nav _share = Nav(
     ossUrl: '',
     title: '分享',
@@ -30,123 +32,133 @@ class ProductDetail extends StatelessWidget {
     '正品保证',
     '7天退换',
   ];
+  final ProductDetailProvider _productDetailProvider = ProductDetailProvider();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: BaseAppBar(),
-        body: Column(
-          children: <Widget>[
-            // new BottomSheetController(),
-            Expanded(
-              child: Container(
-                child: ProductInfo(
-                  product: product,
-                  share: _share,
-                  highlightColor: _highlightColor,
-                  tags: _tags,
-                ),
-              ),
-            ),
-            // 操作
-            Container(
-              height: ScreenUtil().setWidth(95),
-              child: Row(children: <Widget>[
-                Container(
-                  width: ScreenUtil().setWidth(240),
-                  color: Colors.white,
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: InkWell(
-                          onTap: () {},
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
+        body: FutureBuilder(
+            future: _productDetailProvider.getProductDetail(id),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Column(
+                  children: <Widget>[
+                    // new BottomSheetController(),
+                    Expanded(
+                      child: Container(
+                        child: ProductInfo(
+                          product: snapshot.data.product,
+                          share: _share,
+                          highlightColor: _highlightColor,
+                          tags: _tags,
+                        ),
+                      ),
+                    ),
+                    // 操作
+                    Container(
+                      height: ScreenUtil().setWidth(95),
+                      child: Row(children: <Widget>[
+                        Container(
+                          width: ScreenUtil().setWidth(240),
+                          color: Colors.white,
+                          child: Row(
                             children: <Widget>[
-                              Image.network(_fav.ossUrl),
-                              Text(
-                                _fav.title,
-                                style: TextStyle(
-                                  fontSize: ScreenUtil().setSp(22),
-                                  color: Color(0xFFFD5454),
+                              Expanded(
+                                child: InkWell(
+                                  onTap: () {},
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Image.network(_fav.ossUrl),
+                                      Text(
+                                        _fav.title,
+                                        style: TextStyle(
+                                          fontSize: ScreenUtil().setSp(22),
+                                          color: Color(0xFFFD5454),
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              )
+                              ),
+                              Expanded(
+                                child: InkWell(
+                                  onTap: () {},
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Image.network(_shop.ossUrl),
+                                      Text(
+                                        _shop.title,
+                                        style: TextStyle(
+                                          fontSize: ScreenUtil().setSp(22),
+                                          color: Color(0xFFFD5454),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),
-                      ),
-                      Expanded(
-                        child: InkWell(
-                          onTap: () {},
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Image.network(_shop.ossUrl),
-                              Text(
-                                _shop.title,
+                        Expanded(
+                          child: ConstrainedBox(
+                            constraints: BoxConstraints(
+                              minHeight: double.infinity,
+                              maxHeight: double.infinity,
+                            ),
+                            child: RaisedButton(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.zero,
+                              ),
+                              elevation: 0,
+                              color: Color(0xFFFE940F),
+                              onPressed: () {},
+                              child: Text(
+                                '加入购物车',
                                 style: TextStyle(
-                                  fontSize: ScreenUtil().setSp(22),
-                                  color: Color(0xFFFD5454),
+                                  fontSize: ScreenUtil().setSp(28),
+                                  color: Colors.white,
                                 ),
-                              )
-                            ],
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      minHeight: double.infinity,
-                      maxHeight: double.infinity,
-                    ),
-                    child: RaisedButton(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.zero,
-                      ),
-                      elevation: 0,
-                      color: Color(0xFFFE940F),
-                      onPressed: () {},
-                      child: Text(
-                        '加入购物车',
-                        style: TextStyle(
-                          fontSize: ScreenUtil().setSp(28),
-                          color: Colors.white,
+                        Container(
+                          width: ScreenUtil().setWidth(240),
+                          child: ConstrainedBox(
+                            constraints: BoxConstraints(
+                              minHeight: double.infinity,
+                              maxHeight: double.infinity,
+                            ),
+                            child: RaisedButton(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.zero,
+                              ),
+                              elevation: 0,
+                              color: Color(0xFFFD5454),
+                              onPressed: () {},
+                              child: Text(
+                                '立即购买',
+                                style: TextStyle(
+                                  fontSize: ScreenUtil().setSp(28),
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
+                      ]),
                     ),
-                  ),
-                ),
-                Container(
-                  width: ScreenUtil().setWidth(240),
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      minHeight: double.infinity,
-                      maxHeight: double.infinity,
-                    ),
-                    child: RaisedButton(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.zero,
-                      ),
-                      elevation: 0,
-                      color: Color(0xFFFD5454),
-                      onPressed: () {},
-                      child: Text(
-                        '立即购买',
-                        style: TextStyle(
-                          fontSize: ScreenUtil().setSp(28),
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ]),
-            ),
-          ],
-        ));
+                  ],
+                );
+              } else if (snapshot.hasError) {
+                return Text("${snapshot.error}");
+              }
+              return CircularProgressIndicator();
+            }));
   }
 }
 
@@ -177,17 +189,15 @@ class ProductInfo extends StatelessWidget {
           // Container(
           //   height: ScreenUtil().setWidth(750),
           //   width: double.infinity,
-          //   child: Image.asset(
-          //     product.image,
+          //   child: Image.network(
+          //     product.ossUrl,
           //     fit: BoxFit.cover,
           //   ),
           // ),
           // 商品介绍
           Container(
             color: Colors.white,
-            padding: EdgeInsets.symmetric(
-              horizontal: ScreenUtil().setWidth(21),
-            ),
+            padding: Paddings.fieldPadding,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -203,15 +213,12 @@ class ProductInfo extends StatelessWidget {
                         constraints: BoxConstraints(
                           maxWidth: ScreenUtil().setWidth(600),
                         ),
-                        // child: Text(
-                        //   product.title,
-                        //   maxLines: 1,
-                        //   overflow: TextOverflow.ellipsis,
-                        //   style: TextStyle(
-                        //     fontSize: ScreenUtil().setSp(28),
-                        //     color: Color(0xFF333333),
-                        //   ),
-                        // ),
+                        child: Text(
+                          product.title,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyles.body1,
+                        ),
                       ),
                       Wrap(
                         direction: Axis.vertical,
@@ -233,18 +240,18 @@ class ProductInfo extends StatelessWidget {
                     ],
                   ),
                 ),
-                // Container(
-                //   padding: EdgeInsets.only(
-                //     top: ScreenUtil().setWidth(21),
-                //   ),
-                //   child: Text(
-                //     '￥ ${product.price}',
-                //     style: TextStyle(
-                //       fontSize: ScreenUtil().setSp(38),
-                //       color: _highlightColor,
-                //     ),
-                //   ),
-                // ),
+                Container(
+                  padding: EdgeInsets.only(
+                    top: ScreenUtil().setWidth(21),
+                  ),
+                  child: Text(
+                    '￥ ${product.sellPrice}',
+                    style: TextStyle(
+                      fontSize: ScreenUtil().setSp(38),
+                      color: _highlightColor,
+                    ),
+                  ),
+                ),
                 Container(
                   padding: EdgeInsets.only(
                     top: ScreenUtil().setWidth(27),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sample_app/utils/text_styles.dart';
 import 'package:sample_app/widgets/base_app_bar.dart';
-import 'package:sample_app/widgets/base_header.dart';
 
 class PayResult extends StatelessWidget {
   @override

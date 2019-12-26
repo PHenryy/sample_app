@@ -10,7 +10,7 @@ class Product {
   int totalAmount;
   String province;
   String city;
-  String label;
+  dynamic label;
   int freePostageNum;
   String freePostagePrice;
   String disFreeAddress;

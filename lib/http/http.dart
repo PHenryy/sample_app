@@ -24,6 +24,10 @@ class Http extends DioForNative {
     //   client.badCertificateCallback =
     //       (X509Certificate cert, String host, int port) => Platform.isAndroid;
     // };
+    // _http.interceptors.add(LogInterceptor(
+    //   responseBody: true,
+    //   requestBody: true,
+    // ));
     return _http;
   }
 

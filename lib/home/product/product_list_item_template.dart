@@ -4,14 +4,16 @@ import 'package:sample_app/models/product.dart';
 import 'package:sample_app/utils/text_styles.dart';
 
 class ProductListItemTemplate extends StatelessWidget {
-  ProductListItemTemplate({this.product});
+  ProductListItemTemplate({
+    this.product,
+  });
   final Product product;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).pushNamed('/product', arguments: product);
+        Navigator.of(context).pushNamed('/product', arguments: product.id);
       },
       child: Container(
         color: Colors.white,
@@ -40,7 +42,7 @@ class ProductListItemTemplate extends StatelessWidget {
                       style: TextStyles.body1,
                     ),
                     SizedBox(
-                      height: 5.0,
+                      height: ScreenUtil().setWidth(10),
                     ),
                     Text(
                       '销量：${product.saleAmount}',

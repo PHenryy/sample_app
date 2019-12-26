@@ -25,6 +25,7 @@ class Home extends StatelessWidget {
             SearchBarWidget(),
             Expanded(
               child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
                 child: Column(
                   children: <Widget>[
                     BannersWidget(),
