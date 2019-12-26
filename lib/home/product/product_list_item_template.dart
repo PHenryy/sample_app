@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sample_app/models/product.dart';
+import 'package:sample_app/models/product_list_item.dart';
 import 'package:sample_app/utils/text_styles.dart';
 
 class ProductListItemTemplate extends StatelessWidget {
   ProductListItemTemplate({
     this.product,
   });
-  final Product product;
+  final ProductListItem product;
 
   @override
   Widget build(BuildContext context) {

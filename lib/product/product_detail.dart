@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sample_app/cart/counter.dart';
 import 'package:sample_app/home/nav/nav.dart';
-import 'package:sample_app/models/product.dart';
+import 'package:sample_app/models/product_list_item.dart';
 import 'package:sample_app/product/product_info.dart';
 import 'package:sample_app/utils/paddings.dart';
 import 'package:sample_app/utils/text_styles.dart';
@@ -174,7 +174,7 @@ class ProductInfo extends StatelessWidget {
         _tags = tags,
         super(key: key);
 
-  final Product product;
+  final ProductListItem product;
   final Nav _share;
   final Color _highlightColor;
   final List<String> _tags;

@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sample_app/home/home.dart';
-import 'package:sample_app/models/product.dart';
 import 'package:sample_app/order/order_detail.dart';
 import 'package:sample_app/order/order_pay.dart';
 import 'package:sample_app/order/order_pay_method.dart';

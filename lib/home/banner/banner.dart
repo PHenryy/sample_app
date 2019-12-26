@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:sample_app/http/http.dart';
+import 'package:sample_app/models/banner.dart';
 
 class BannersWidget extends StatefulWidget {
   BannersWidget({
@@ -49,13 +50,6 @@ class _BannersWidgetState extends State<BannersWidget> {
       },
     );
   }
-}
-
-class Banner {
-  final String ossUrl;
-
-  Banner(this.ossUrl);
-  Banner.fromJson(Map<String, dynamic> json) : ossUrl = json['oss_url'];
 }
 
 class BannerResponse {

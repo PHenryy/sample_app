@@ -1,75 +1,63 @@
-class Product {
+class ProductListItem {
   int id;
   String title;
   String shortTitle;
+  int coverImg;
   String sellPrice;
   String originalPrice;
-  int cateId;
   int saleAmount;
+  int cateId;
   int totalAmount;
   String province;
   String city;
-  List<String> label;
+  String label;
   int freePostageNum;
   String freePostagePrice;
   String disFreeAddress;
   int postType;
   int postTemplatePrice;
-  List<String> standard;
-  String content;
-  List<Banners> banners;
+  String ossUrl;
 
-  Product(
-      {this.id,
-      this.title,
-      this.shortTitle,
-      this.sellPrice,
-      this.originalPrice,
-      this.cateId,
-      this.saleAmount,
-      this.totalAmount,
-      this.province,
-      this.city,
-      this.label,
-      this.freePostageNum,
-      this.freePostagePrice,
-      this.disFreeAddress,
-      this.postType,
-      this.postTemplatePrice,
-      this.standard,
-      this.content,
-      this.banners});
+  ProductListItem({
+    this.id,
+    this.title,
+    this.shortTitle,
+    this.coverImg,
+    this.sellPrice,
+    this.originalPrice,
+    this.saleAmount,
+    this.cateId,
+    this.totalAmount,
+    this.province,
+    this.city,
+    this.label,
+    this.freePostageNum,
+    this.freePostagePrice,
+    this.disFreeAddress,
+    this.postType,
+    this.postTemplatePrice,
+    this.ossUrl,
+  });
 
-  Product.fromJson(Map<String, dynamic> json) {
+  ProductListItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
     shortTitle = json['short_title'];
+    coverImg = json['cover_img'];
     sellPrice = json['sell_price'];
     originalPrice = json['original_price'];
-    cateId = json['cate_id'];
     saleAmount = json['sale_amount'];
+    cateId = json['cate_id'];
     totalAmount = json['total_amount'];
     province = json['province'];
     city = json['city'];
-    label = json['label'].cast<String>();
+    label = json['label'];
     freePostageNum = json['free_postage_num'];
     freePostagePrice = json['free_postage_price'];
     disFreeAddress = json['dis_free_address'];
     postType = json['post_type'];
     postTemplatePrice = json['post_template_price'];
-    if (json['standard'] != null) {
-      standard = new List<String>();
-      json['standard'].forEach((v) {
-        standard.add(v);
-      });
-    }
-    content = json['content'];
-    if (json['banners'] != null) {
-      banners = new List<Banners>();
-      json['banners'].forEach((v) {
-        banners.add(new Banners.fromJson(v));
-      });
-    }
+    ossUrl = json['oss_url'];
   }
 
   Map<String, dynamic> toJson() {
@@ -77,10 +65,11 @@ class Product {
     data['id'] = this.id;
     data['title'] = this.title;
     data['short_title'] = this.shortTitle;
+    data['cover_img'] = this.coverImg;
     data['sell_price'] = this.sellPrice;
     data['original_price'] = this.originalPrice;
-    data['cate_id'] = this.cateId;
     data['sale_amount'] = this.saleAmount;
+    data['cate_id'] = this.cateId;
     data['total_amount'] = this.totalAmount;
     data['province'] = this.province;
     data['city'] = this.city;
@@ -90,13 +79,7 @@ class Product {
     data['dis_free_address'] = this.disFreeAddress;
     data['post_type'] = this.postType;
     data['post_template_price'] = this.postTemplatePrice;
-    if (this.standard != null) {
-      data['standard'] = this.standard.toList();
-    }
-    data['content'] = this.content;
-    if (this.banners != null) {
-      data['banners'] = this.banners.map((v) => v.toJson()).toList();
-    }
+    data['oss_url'] = this.ossUrl;
     return data;
   }
 }

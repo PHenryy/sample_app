@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sample_app/home/product/product_list_item_template.dart';
 import 'package:sample_app/http/http.dart';
-import 'package:sample_app/models/product.dart';
+import 'package:sample_app/models/product_list_item.dart';
 
 class ProductResponse {
-  final List<Product> products;
+  final List<ProductListItem> products;
   final String error;
 
   ProductResponse({
@@ -17,7 +17,7 @@ class ProductResponse {
   ProductResponse.fromJson(Map<String, dynamic> json)
       : error = '',
         products = (json['data'] as List)
-            .map((item) => Product.fromJson(item))
+            .map((item) => ProductListItem.fromJson(item))
             .toList();
 
   ProductResponse.withError(String error)

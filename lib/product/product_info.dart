@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:sample_app/http/http.dart';
-import 'package:sample_app/models/product.dart';
+import 'package:sample_app/models/product_list_item.dart';
 
 class ProductDetailResponse {
-  final Product product;
+  final ProductListItem product;
   final String error;
 
   ProductDetailResponse({
@@ -12,7 +12,7 @@ class ProductDetailResponse {
   });
 
   ProductDetailResponse.fromJson(Map<String, dynamic> json)
-      : product = Product.fromJson(json['data']),
+      : product = ProductListItem.fromJson(json['data']),
         error = '';
   ProductDetailResponse.withError(String error)
       : product = null,
