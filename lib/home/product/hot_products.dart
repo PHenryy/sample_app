@@ -6,7 +6,7 @@ import 'package:sample_app/http/http.dart';
 import 'package:sample_app/models/product_list_item.dart';
 
 class ProductResponse {
-  final List<ProductListItem> products;
+  final List<ProductListItemModel> products;
   final String error;
 
   ProductResponse({
@@ -17,7 +17,7 @@ class ProductResponse {
   ProductResponse.fromJson(Map<String, dynamic> json)
       : error = '',
         products = (json['data'] as List)
-            .map((item) => ProductListItem.fromJson(item))
+            .map((item) => ProductListItemModel.fromJson(item))
             .toList();
 
   ProductResponse.withError(String error)

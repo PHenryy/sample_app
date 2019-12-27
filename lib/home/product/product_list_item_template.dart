@@ -7,7 +7,7 @@ class ProductListItemTemplate extends StatelessWidget {
   ProductListItemTemplate({
     this.product,
   });
-  final ProductListItem product;
+  final ProductListItemModel product;
 
   @override
   Widget build(BuildContext context) {

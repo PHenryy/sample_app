@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BaseBackButton extends StatelessWidget {
   /// Creates an [IconButton] with the appropriate "back" icon for the current
@@ -16,8 +17,8 @@ class BaseBackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       icon: Icon(
-        Icons.chevron_left,
-        size: ScreenUtil().setWidth(76),
+        FontAwesomeIcons.chevronLeft,
+        // size: ScreenUtil().setWidth(76),
       ),
       color: color,
       onPressed: () {

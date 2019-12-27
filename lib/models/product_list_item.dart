@@ -1,4 +1,4 @@
-class ProductListItem {
+class ProductListItemModel {
   int id;
   String title;
   String shortTitle;
@@ -18,7 +18,7 @@ class ProductListItem {
   int postTemplatePrice;
   String ossUrl;
 
-  ProductListItem({
+  ProductListItemModel({
     this.id,
     this.title,
     this.shortTitle,
@@ -39,7 +39,7 @@ class ProductListItem {
     this.ossUrl,
   });
 
-  ProductListItem.fromJson(Map<String, dynamic> json) {
+  ProductListItemModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
     shortTitle = json['short_title'];

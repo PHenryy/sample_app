@@ -11,7 +11,7 @@ import 'package:sample_app/order/tracking_number.dart';
 import 'package:sample_app/user/edit_user_address.dart';
 import 'package:sample_app/user/user_addresses.dart';
 import 'package:sample_app/widgets/base_app_bar.dart';
-import 'package:sample_app/product/product_detail.dart';
+import 'package:sample_app/product/product_detail_page.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -23,7 +23,7 @@ class RouteGenerator {
         return CupertinoPageRoute(builder: (_) => Home());
       case '/product':
         if (args is int) {
-          return CupertinoPageRoute(builder: (_) => ProductDetail(args));
+          return CupertinoPageRoute(builder: (_) => ProductDetailPage(args));
         }
         return _errorRoute();
       case '/orderPay':

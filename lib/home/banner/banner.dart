@@ -53,14 +53,14 @@ class _BannersWidgetState extends State<BannersWidget> {
 }
 
 class BannerResponse {
-  final List<Banner> results;
+  final List<BannerModel> results;
   final String error;
 
   BannerResponse(this.results, this.error);
 
   BannerResponse.fromJson(Map<String, dynamic> json)
       : results = (json['data'] as List)
-            .map((item) => Banner.fromJson(item))
+            .map((item) => BannerModel.fromJson(item))
             .toList(),
         error = '';
 

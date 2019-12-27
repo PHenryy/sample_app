@@ -6,6 +6,10 @@ class TextStyles {
     fontSize: ScreenUtil().setSp(28),
     color: Color(0xFF323232),
   );
+  static TextStyle body1xs = TextStyle(
+    fontSize: ScreenUtil().setSp(24),
+    color: Color(0xFF323232),
+  );
   static TextStyle body1xl = TextStyle(
     fontSize: ScreenUtil().setSp(32),
     color: Color(0xFF323232),

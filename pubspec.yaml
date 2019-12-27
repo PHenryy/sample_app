@@ -29,6 +29,9 @@ dependencies:
   # 处理键盘事件 https://github.com/diegoveloper/flutter_keyboard_actions
   keyboard_actions: ^3.1.2
   dio: ^3.0.7
+  font_awesome_flutter: ^8.5.0
+  flutter_html: ^0.11.1
+  flui: ^0.7.4
 
 dev_dependencies:
   flutter_test:

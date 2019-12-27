@@ -1,4 +1,4 @@
-class Banner {
+class BannerModel {
   int id;
   int img;
   int gId;
@@ -6,7 +6,7 @@ class Banner {
   int status;
   String ossUrl;
 
-  Banner({
+  BannerModel({
     this.id,
     this.img,
     this.gId,
@@ -15,7 +15,7 @@ class Banner {
     this.ossUrl,
   });
 
-  Banner.fromJson(Map<String, dynamic> json) {
+  BannerModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     img = json['img'];
     gId = json['g_id'];

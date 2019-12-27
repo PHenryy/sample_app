@@ -1,4 +1,6 @@
-class Product {
+import 'package:sample_app/models/banner.dart';
+
+class ProductModel {
   int id;
   String title;
   String shortTitle;
@@ -17,9 +19,9 @@ class Product {
   int postTemplatePrice;
   List<String> standard;
   String content;
-  List<Banners> banners;
+  List<BannerModel> banners;
 
-  Product(
+  ProductModel(
       {this.id,
       this.title,
       this.shortTitle,
@@ -40,7 +42,7 @@ class Product {
       this.content,
       this.banners});
 
-  Product.fromJson(Map<String, dynamic> json) {
+  ProductModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
     shortTitle = json['short_title'];
@@ -65,9 +67,9 @@ class Product {
     }
     content = json['content'];
     if (json['banners'] != null) {
-      banners = new List<Banners>();
+      banners = new List<BannerModel>();
       json['banners'].forEach((v) {
-        banners.add(new Banners.fromJson(v));
+        banners.add(new BannerModel.fromJson(v));
       });
     }
   }
