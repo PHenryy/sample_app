@@ -28,6 +28,14 @@ class Http extends DioForNative {
     //   responseBody: true,
     //   requestBody: true,
     // ));
+    _http.interceptors.add(InterceptorsWrapper(
+      onRequest: (RequestOptions options) {
+        String token =
+            'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2Nyb3duLmh6eXhoZnAuY29tL2FwaS9sb2dpbiIsImlhdCI6MTU3NzY5ODUzOCwiZXhwIjoxNTc3ODc4NTM4LCJuYmYiOjE1Nzc2OTg1MzgsImp0aSI6IlZqNTBYU0xYOUExYnc1TkIiLCJzdWIiOjUxLCJwcnYiOiJjNzdlYWJjNmQyOWRiY2UwYjU1ZTk4YmRlYzM5MWI1NDlhNWVmMWYwIn0.ttgyyL5QOeFrq3XAkqckyIwwl8lCnNcbSHvTzHJAXV8';
+        options.headers['Authorization'] = token;
+        return options;
+      },
+    ));
     return _http;
   }
 

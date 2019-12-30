@@ -309,7 +309,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               // 选择数量
                               BaseHeader(
                                 onPressed: () {
-                                  showModalProduct(context);
+                                  showModalProduct(
+                                    context: context,
+                                  );
                                 },
                                 title: '请选择数量',
                                 trailing: Icon(
@@ -471,7 +473,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               elevation: 0,
                               color: Color(0xFFFE940F),
                               onPressed: () {
-                                showModalProduct(context);
+                                showModalProduct(
+                                  context: context,
+                                  onConfirm: (int count) {
+                                    print(count);
+                                  },
+                                );
                               },
                               child: Text(
                                 '加入购物车',
@@ -497,7 +504,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               elevation: 0,
                               color: Color(0xFFFD5454),
                               onPressed: () {
-                                showModalProduct(context);
+                                showModalProduct(
+                                  context: context,
+                                );
                               },
                               child: Text(
                                 '立即购买',
@@ -522,7 +531,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             }));
   }
 
-  void showModalProduct(BuildContext context) {
+  void showModalProduct({
+    BuildContext context,
+    Function onConfirm,
+  }) {
+    int _counterFrom = 1;
+    int _amountSelected = 1;
+
     showModalBottomSheet(
         isDismissible: false,
         context: context,
@@ -601,7 +616,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                         ScreenUtil().setWidth(18),
                                       ),
                                       child: Icon(
-                                        FontAwesomeIcons.timesCircle,
+                                        Icons.close,
                                         color: Color(0xFF999999),
                                       ),
                                     ),
@@ -634,7 +649,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                         color: Color(0xFF6E6E6E),
                                       ),
                                     ),
-                                    Counter(),
+                                    Counter(
+                                      from: _counterFrom,
+                                      min: 1,
+                                      max: _product.totalAmount,
+                                      onChange: (int count) {
+                                        _amountSelected = count;
+                                      },
+                                    ),
                                   ],
                                 ),
                               ),
@@ -649,7 +671,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         ),
                         child: RaisedButton(
                           onPressed: () {
-                            Navigator.of(context).pushNamed('/orderPay');
+                            if (onConfirm != null) {
+                              onConfirm(_amountSelected);
+                            }
                           },
                           color: Color(0xFFFD5454),
                           child: Text(

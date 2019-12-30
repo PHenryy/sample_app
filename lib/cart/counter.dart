@@ -2,9 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Counter extends StatefulWidget {
-  Counter({this.from: 1, this.onChange});
+  Counter({
+    this.from = 1,
+    this.onChange,
+    this.min,
+    this.max,
+  });
 
   final int from;
+  final int min;
+  final int max;
   final Function(int) onChange;
 
   @override
@@ -12,34 +19,51 @@ class Counter extends StatefulWidget {
 }
 
 class _CounterState extends State<Counter> {
-  int count;
+  int _count;
   @override
   void initState() {
-    count = widget.from;
+    _count = widget.from;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    bool _subtractDisabled = false;
+    bool _addDisabled = false;
+
+    if (widget.min != null) {
+      _subtractDisabled = _count <= widget.min ? true : false;
+    }
+
+    if (widget.max != null) {
+      _addDisabled = _count >= widget.max ? true : false;
+    }
+
     return Material(
       color: Colors.white,
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(color: Color(0xFFEEEEEE), width: 1),
+          border: Border.all(
+            color: Color(0xFFEEEEEE),
+            width: 1,
+          ),
           borderRadius: BorderRadius.circular(3),
         ),
         child: Row(
           children: <Widget>[
             Container(
-              color: count > 1 ? Colors.white : Color(0xFFF6F5FA),
-              width: ScreenUtil.getInstance().setWidth(48.0),
-              height: ScreenUtil.getInstance().setHeight(48.0),
+              color: _subtractDisabled ? Color(0xFFF6F5FA) : Colors.white,
+              width: ScreenUtil().setWidth(48.0),
+              height: ScreenUtil().setHeight(48.0),
               child: InkWell(
                 onTap: () {
-                  if (count > 1) {
+                  if (!_subtractDisabled) {
                     setState(() {
-                      count -= 1;
-                      widget.onChange(count);
+                      _count -= 1;
+
+                      if (widget.onChange != null) {
+                        widget.onChange(_count);
+                      }
                     });
                   }
                 },
@@ -51,9 +75,9 @@ class _CounterState extends State<Counter> {
             ),
             Container(
               alignment: Alignment.center,
-              height: ScreenUtil.getInstance().setHeight(48.0),
+              height: ScreenUtil().setHeight(48.0),
               padding: EdgeInsets.symmetric(
-                horizontal: ScreenUtil.getInstance().setHeight(28.0),
+                horizontal: ScreenUtil().setHeight(28.0),
               ),
               decoration: BoxDecoration(
                 border: Border(
@@ -67,17 +91,22 @@ class _CounterState extends State<Counter> {
                   ),
                 ),
               ),
-              child: Text('$count'),
+              child: Text('$_count'),
             ),
             Container(
-              width: ScreenUtil.getInstance().setWidth(48.0),
-              height: ScreenUtil.getInstance().setHeight(48.0),
+              color: _addDisabled ? Color(0xFFF6F5FA) : Colors.white,
+              width: ScreenUtil().setWidth(48.0),
+              height: ScreenUtil().setHeight(48.0),
               child: InkWell(
                 onTap: () {
-                  setState(() {
-                    count += 1;
-                    widget.onChange(count);
-                  });
+                  if (!_addDisabled) {
+                    setState(() {
+                      _count += 1;
+                      if (widget.onChange != null) {
+                        widget.onChange(_count);
+                      }
+                    });
+                  }
                 },
                 child: Icon(
                   Icons.add,
