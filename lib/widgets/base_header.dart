@@ -5,7 +5,7 @@ import 'package:sample_app/utils/paddings.dart';
 class BaseHeader extends StatelessWidget {
   BaseHeader({
     this.title,
-    this.height = 85,
+    this.height = 100,
     this.trailing,
     this.tailingIcon,
     this.onPressed,

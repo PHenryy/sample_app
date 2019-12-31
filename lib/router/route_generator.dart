@@ -1,13 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sample_app/home/home.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:sample_app/home/home_page.dart';
 import 'package:sample_app/order/order_detail.dart';
+import 'package:sample_app/order/order_overall.dart';
 import 'package:sample_app/order/order_pay.dart';
 import 'package:sample_app/order/order_pay_method.dart';
 import 'package:sample_app/order/order_refund.dart';
 import 'package:sample_app/order/order_refund_result.dart';
 import 'package:sample_app/order/pay_result.dart';
 import 'package:sample_app/order/tracking_number.dart';
+import 'package:sample_app/search/search_products_page.dart';
 import 'package:sample_app/user/edit_user_address.dart';
 import 'package:sample_app/user/user_addresses.dart';
 import 'package:sample_app/widgets/base_app_bar.dart';
@@ -20,7 +23,7 @@ class RouteGenerator {
 
     switch (settings.name) {
       case '/home':
-        return CupertinoPageRoute(builder: (_) => Home());
+        return CupertinoPageRoute(builder: (_) => HomePage());
       case '/product':
         if (args is int) {
           return CupertinoPageRoute(builder: (_) => ProductDetailPage(args));
@@ -44,6 +47,22 @@ class RouteGenerator {
         return CupertinoPageRoute(builder: (_) => UserAddresses());
       case '/user/address/edit':
         return CupertinoPageRoute(builder: (_) => EditUserAddress());
+
+      // search
+      case '/search':
+        return PageTransition(
+          child: SearchProductsPage(),
+          type: PageTransitionType.fade,
+          settings: settings,
+        );
+
+      // order
+      case '/orderOverall':
+        return PageTransition(
+          child: OrderOverall(),
+          type: PageTransitionType.rightToLeft,
+          settings: settings,
+        );
       // Validation of correct data type
       // if (args is String) {
       //   return MaterialPageRoute(

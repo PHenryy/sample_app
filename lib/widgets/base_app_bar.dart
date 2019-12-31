@@ -1,13 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import 'package:sample_app/widgets/base_back_button.dart';
 
 const double kToolbarHeight = 56;
 const double _kLeadingWidth = kToolbarHeight;
 
-class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
+class BaseAppBar extends StatefulWidget implements PreferredSizeWidget {
   BaseAppBar({this.trailing, this.title = '媓钻官方商城'}) : super();
+
+  final Widget trailing;
+  final String title;
+
+  @override
+  _BaseAppBarState createState() => _BaseAppBarState();
+
+  @override
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+}
+
+class _BaseAppBarState extends State<BaseAppBar> {
+  @override
+  void initState() {
+    FlutterStatusbarcolor.setStatusBarColor(Color(0xFF34BBE7));
+    super.initState();
+  }
 
   final Widget leading = ConstrainedBox(
     constraints: const BoxConstraints.tightFor(
@@ -18,8 +36,6 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
       color: Colors.white,
     ),
   );
-  final Widget trailing;
-  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +53,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
                 color: Color(0xFF34BBE7),
                 child: Center(
                   child: Text(
-                    title,
+                    widget.title,
                     style: TextStyle(
                       fontSize: ScreenUtil().setSp(38.0),
                       fontWeight: FontWeight.w500,
@@ -52,14 +68,12 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
                 top: 0,
                 child: canPop ? leading : Container(),
               ),
-              Positioned(right: 0, top: 0, child: trailing ?? Container())
+              Positioned(
+                  right: 0, top: 0, child: widget.trailing ?? Container())
             ],
           ),
         ),
       ),
     );
   }
-
-  @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }

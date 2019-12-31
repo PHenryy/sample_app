@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:sample_app/home/banner/banner.dart';
 import 'package:sample_app/home/nav/nav.dart';
 import 'package:sample_app/home/product/hot_products.dart';
+import 'package:sample_app/home/widgets/search_bar_widget.dart';
 import 'package:sample_app/widgets/base_app_bar.dart';
 // import 'package:sample_app/widgets/text_carousel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sample_app/widgets/base_gutters.dart';
 
-class Home extends StatelessWidget {
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)..init(context);
@@ -89,50 +90,3 @@ class Home extends StatelessWidget {
     );
   }
 }
-
-class SearchBarWidget extends StatelessWidget {
-  const SearchBarWidget({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Theme.of(context).primaryColor,
-      padding: EdgeInsets.symmetric(
-        horizontal: ScreenUtil().setWidth(24),
-        vertical: ScreenUtil().setWidth(20),
-      ),
-      child: MaterialButton(
-        elevation: 0,
-        shape: StadiumBorder(),
-        color: Colors.white,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Icon(
-              CupertinoIcons.search,
-              color: Color(0xFFCCCCCC),
-              size: 18.0,
-            ),
-            SizedBox(
-              width: 3.5,
-            ),
-            Text(
-              '搜索',
-              style: TextStyle(
-                fontSize: 16.0,
-                color: Color(0xFFCCCCCC),
-              ),
-            )
-          ],
-        ),
-        onPressed: () {},
-      ),
-    );
-  }
-}
-
-// 导航图标
-// /navigate/getNavList

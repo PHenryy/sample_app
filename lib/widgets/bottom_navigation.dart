@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../home/home.dart';
+import '../home/home_page.dart';
 import '../screens/products.dart';
 import '../cart/cart.dart';
-import '../user/user.dart';
+import '../user/user_page.dart';
 import '../widgets/icecons_icons.dart';
 
 class BottomNavation extends StatefulWidget {
@@ -15,10 +15,10 @@ class _BottomNavationState extends State<BottomNavation> {
   int _currentIndex = 0;
 
   final List<Widget> _screens = [
-    Home(),
+    HomePage(),
     Products(),
     Cart(),
-    User(),
+    UserPage(),
   ];
 
   @override

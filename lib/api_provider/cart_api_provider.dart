@@ -4,7 +4,7 @@ import 'package:sample_app/http/http.dart';
 class CartApiProvider {
   Http _http = Http();
 
-  Future<T> addShopCard(dynamic data) async {
+  Future addShopCard(dynamic data) async {
     try {
       String url = '/api/shop_card';
       Response response = await _http.post(

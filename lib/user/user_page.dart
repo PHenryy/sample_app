@@ -1,8 +1,11 @@
+import 'package:flui/flui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sample_app/home/nav/nav.dart';
+import 'package:sample_app/utils/text_styles.dart';
 import 'package:sample_app/widgets/arc_clipper.dart';
 import 'package:sample_app/widgets/base_app_bar.dart';
+import 'package:sample_app/widgets/base_header.dart';
 
 class DailyBonus {
   DailyBonus({this.point, this.received});
@@ -11,7 +14,7 @@ class DailyBonus {
   bool received;
 }
 
-class User extends StatelessWidget {
+class UserPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<Nav> _navTools = <Nav>[
@@ -282,42 +285,18 @@ class User extends StatelessWidget {
               ),
               child: Column(
                 children: <Widget>[
-                  Container(
-                    height: ScreenUtil().setWidth(86.0),
-                    padding: EdgeInsets.only(
-                      left: ScreenUtil().setWidth(22.0),
-                      right: ScreenUtil().setWidth(30.0),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      // crossAxisAlignment: CrossAxisAlignment.center,
+                  FLListTile(
+                    title: Text('我的订单'),
+                    trailing: Wrap(
+                      crossAxisAlignment: WrapCrossAlignment.center,
                       children: <Widget>[
-                        Text(
-                          '我的订单',
-                          style: TextStyle(
-                            fontSize: ScreenUtil().setSp(28.0),
-                            color: Color(0xFF3A3A3A),
-                          ),
-                        ),
-                        Wrap(
-                          crossAxisAlignment: WrapCrossAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              '查看全部',
-                              style: TextStyle(
-                                fontSize: ScreenUtil().setSp(26.0),
-                                color: Color(0xFFA1A1A1),
-                              ),
-                            ),
-                            Icon(
-                              Icons.chevron_right,
-                              size: 26.0,
-                              color: Color(0xFFA1A1A1),
-                            ),
-                          ],
-                        ),
+                        Text('查看全部'),
+                        Icon(Icons.navigate_next),
                       ],
                     ),
+                    onTap: () {
+                      Navigator.of(context).pushNamed('/orderOverall');
+                    },
                   ),
                   Divider(
                     height: 1,
